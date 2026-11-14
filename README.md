@@ -2,7 +2,7 @@
 
 A pocket bass-line synthesizer and step sequencer for the phone browser — a skeuomorphic homage to the classic Roland TB-303 / TB-03 panel. One HTML file, no dependencies, works offline as a PWA.
 
-**Live:** https://shoogaze.github.io/zion303/
+**Live:** [https://shoogaze.github.io/zion303/](https://shoogaze.github.io/zion-bass-303/)
 
 > ZION 303 is an independent project inspired by the TB-303 design. It is not affiliated with or endorsed by Roland. "Roland" and "TB-303" are trademarks of their respective owners.
 
