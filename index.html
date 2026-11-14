@@ -23,10 +23,10 @@ html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-beh
 #chassis{position:absolute;inset:0;border-radius:18px;overflow:hidden;
   background:linear-gradient(180deg,#d9dbe0 0%,#cdd0d6 40%,#c3c6cd 100%);
   box-shadow:0 0 0 1px #62656d,0 0 0 4px #aeb1b9,0 0 0 5px #6b6e76,0 34px 46px rgba(0,0,0,.65),0 8px 14px rgba(0,0,0,.5)}
-#chassis::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.55;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .2  0 0 0 0 .22  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#chassis::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.95;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .2  0 0 0 0 .22  0 0 0 .42 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 #chassis::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;z-index:50;
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.75),inset 0 -3px 5px rgba(0,0,0,.28),inset 3px 0 4px rgba(255,255,255,.25),inset -3px 0 4px rgba(0,0,0,.14)}
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.8),inset 0 -3px 5px rgba(0,0,0,.3),inset 3px 0 4px rgba(255,255,255,.3),inset -3px 0 4px rgba(0,0,0,.16),inset 0 0 0 5px rgba(255,255,255,.10),inset 0 0 0 6px rgba(0,0,0,.10),inset 0 0 46px rgba(0,0,0,.12)}
 .band{position:absolute;left:0;right:0}
 .groove{position:absolute;left:0;right:0;height:3px;background:#3b3c42;box-shadow:0 1px 0 rgba(255,255,255,.65),0 -1px 0 rgba(0,0,0,.3)}
 .vline{position:absolute;width:2px;background:#3b3c42;box-shadow:1px 0 0 rgba(255,255,255,.6)}
@@ -116,7 +116,6 @@ html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-beh
 /* wordmarks */
 .mark{position:absolute;white-space:nowrap;color:var(--ink);pointer-events:none}
 .mark.big{font:900 italic 34px/1 "ZionMark","Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.04em}
-.mark.bass{font:300 15px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.08em;color:var(--ink2)}
 .mark.brand{font:900 15px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.2em}
 .helpbtn{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   font:800 12px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink2);cursor:pointer;touch-action:none;
@@ -183,6 +182,16 @@ svg polyline{stroke:var(--ink)}
 .bkey{color:var(--bkink);background:linear-gradient(180deg,var(--bk1) 0%,var(--bk2) 50%,var(--bk3) 100%);
  box-shadow:0 4px 0 var(--bksh),0 6px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 2px rgba(0,0,0,.5)}
 .bkey.down{box-shadow:0 1px 0 var(--bksh),0 3px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2)}
+/* chassis detail: light falloff, etched lines, screws */
+.sheen{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 70% at 18% 8%,rgba(255,255,255,.34),rgba(255,255,255,0) 70%),
+             radial-gradient(ellipse 70% 80% at 92% 100%,rgba(30,32,40,.16),rgba(30,32,40,0) 70%)}
+.screw{position:absolute;width:14px;height:14px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#f4f5f7,#a3a6af 55%,#6f727d);
+  box-shadow:0 1px 0 rgba(255,255,255,.8),0 2px 3px rgba(0,0,0,.4),inset 0 0 0 1px rgba(0,0,0,.3)}
+.screw::after{content:"";position:absolute;left:2px;right:2px;top:6px;height:2px;border-radius:1px;background:#3d3f46;
+  box-shadow:0 1px 0 rgba(255,255,255,.5);transform:rotate(var(--r,0deg))}
+.etch{position:absolute;width:48px;height:2px;background:#6b6e77;box-shadow:0 1px 0 rgba(255,255,255,.75)}
 /* library sheet — brushed-grey like the synth */
 [data-id=lib]{font:800 12px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em}
 #lib{position:absolute;inset:0;z-index:68;border-radius:18px;background:linear-gradient(180deg,#d9dbe0 0%,#cdd0d6 40%,#c3c6cd 100%);
@@ -817,10 +826,14 @@ function osd(text, ms) {
 /* ================= chassis layout ================= */
 const bands = [
   ['top:0;height:97px;background:linear-gradient(rgba(255,255,255,.20),rgba(255,255,255,0))'],
-  ['top:100px;height:139px;background:linear-gradient(rgba(0,0,0,.07),rgba(0,0,0,.02))'],
-  ['top:242px;bottom:0;background:linear-gradient(rgba(0,0,0,.04),rgba(0,0,0,.10))']
+  ['top:100px;height:126px;background:linear-gradient(rgba(0,0,0,.07),rgba(0,0,0,.02))'],
+  ['top:229px;bottom:0;background:linear-gradient(rgba(0,0,0,.04),rgba(0,0,0,.10))']
 ];
 bands.forEach(b => el('band', chassis, b[0]));
+el('sheen', chassis, '');
+// etched lines and screws
+[26, 933].forEach(x => { for (let i = 0; i < 4; i++) el('etch', chassis, 'left:' + x + 'px;top:' + (146 + i * 9) + 'px'); });
+[[10, 478, 60], [980, 478, -15]].forEach(c => el('screw', chassis, 'left:' + c[0] + 'px;top:' + c[1] + 'px;--r:' + c[2] + 'deg'));
 el('groove', chassis, 'top:96px');
 el('groove', chassis, 'top:226px');
 el('vline', chassis, 'left:262px;top:6px;height:86px');
@@ -981,7 +994,6 @@ const fxSw = {};
   lab(f[1], f[2], 14, { cls: 'sm' });
   fxSw[f[0]] = mkSwitch(f[2], 46, S[f[0]], v => { S[f[0]] = v; send(paramMsg()); save(); osd(f[1] + (v ? '  ON' : '  OFF')); });
 });
-el('mark bass', chassis, 'right:30px;top:72px', 'Pocket Bass');
 el('mark big', chassis, 'left:744px;top:145px;transform:translateX(-50%)', 'ZION 303');
 lab('POCKET BASS SEQUENCER', 744, 197, { s: 9.5, w: 800, ls: .1 });
 lab('TEMPO', 608, 199, { cls: 'sm' });
@@ -1385,7 +1397,7 @@ function schem(marks) {
   [301, 381, 460, 540, 619, 698].forEach(x => { h += circ(x, 58, 24); });
   [130, 772, 822, 872].forEach(x => { h += '<rect x="' + (x - 24) + '" y="38" width="48" height="18" rx="4" fill="#2a2c32"/>'; });
   [50, 210, 920, 966].forEach(x => { h += circ(x, 46, 12, '#8d909a'); });
-  h += '<text x="970" y="86" text-anchor="end" font-family="Helvetica,Arial" font-weight="300" font-size="15" letter-spacing="1.2" fill="#4b4d55">Pocket Bass</text><text x="744" y="176" text-anchor="middle" font-family="ZionMark,Helvetica,Arial" font-weight="900" font-style="italic" font-size="34" fill="#25262a">ZION 303</text>';
+  h += '<text x="744" y="176" text-anchor="middle" font-family="ZionMark,Helvetica,Arial" font-weight="900" font-style="italic" font-size="34" fill="#25262a">ZION 303</text>';
   [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += circ(k[0], k[1], k[2]); });
   h += '<rect x="566" y="150" width="82" height="38" rx="5" fill="#120707"/><text x="607" y="180" text-anchor="middle" font-family="Courier New,monospace" font-weight="700" font-size="26" fill="#ff5436">128.0</text>';
   [[24, 261, 100, 31, '#6f727d'], [134, 261, 100, 31, '#6f727d'], [24, 323, 210, 46, '#f1f1f3'], [24, 415, 100, 31, '#f1f1f3'], [134, 415, 100, 31, '#f1f1f3']]

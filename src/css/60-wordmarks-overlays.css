@@ -1,7 +1,6 @@
 /* wordmarks */
 .mark{position:absolute;white-space:nowrap;color:var(--ink);pointer-events:none}
 .mark.big{font:900 italic 34px/1 "ZionMark","Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.04em}
-.mark.bass{font:300 15px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.08em;color:var(--ink2)}
 .mark.brand{font:900 15px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.2em}
 .helpbtn{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   font:800 12px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink2);cursor:pointer;touch-action:none;

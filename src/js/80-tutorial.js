@@ -7,7 +7,7 @@ function schem(marks) {
   [301, 381, 460, 540, 619, 698].forEach(x => { h += circ(x, 58, 24); });
   [130, 772, 822, 872].forEach(x => { h += '<rect x="' + (x - 24) + '" y="38" width="48" height="18" rx="4" fill="#2a2c32"/>'; });
   [50, 210, 920, 966].forEach(x => { h += circ(x, 46, 12, '#8d909a'); });
-  h += '<text x="970" y="86" text-anchor="end" font-family="Helvetica,Arial" font-weight="300" font-size="15" letter-spacing="1.2" fill="#4b4d55">Pocket Bass</text><text x="744" y="176" text-anchor="middle" font-family="ZionMark,Helvetica,Arial" font-weight="900" font-style="italic" font-size="34" fill="#25262a">ZION 303</text>';
+  h += '<text x="744" y="176" text-anchor="middle" font-family="ZionMark,Helvetica,Arial" font-weight="900" font-style="italic" font-size="34" fill="#25262a">ZION 303</text>';
   [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += circ(k[0], k[1], k[2]); });
   h += '<rect x="566" y="150" width="82" height="38" rx="5" fill="#120707"/><text x="607" y="180" text-anchor="middle" font-family="Courier New,monospace" font-weight="700" font-size="26" fill="#ff5436">128.0</text>';
   [[24, 261, 100, 31, '#6f727d'], [134, 261, 100, 31, '#6f727d'], [24, 323, 210, 46, '#f1f1f3'], [24, 415, 100, 31, '#f1f1f3'], [134, 415, 100, 31, '#f1f1f3']]

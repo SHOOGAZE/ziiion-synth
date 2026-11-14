@@ -39,7 +39,6 @@ const fxSw = {};
   lab(f[1], f[2], 14, { cls: 'sm' });
   fxSw[f[0]] = mkSwitch(f[2], 46, S[f[0]], v => { S[f[0]] = v; send(paramMsg()); save(); osd(f[1] + (v ? '  ON' : '  OFF')); });
 });
-el('mark bass', chassis, 'right:30px;top:72px', 'Pocket Bass');
 el('mark big', chassis, 'left:744px;top:145px;transform:translateX(-50%)', 'ZION 303');
 lab('POCKET BASS SEQUENCER', 744, 197, { s: 9.5, w: 800, ls: .1 });
 lab('TEMPO', 608, 199, { cls: 'sm' });
