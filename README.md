@@ -102,8 +102,3 @@ Panel text uses the system Helvetica Neue / Arial stack. The ZION wordmark uses 
 
 Full walkthrough: the `?` button inside the app.
 
----
-
-## По-русски
-
-Карманный бас-синтезатор и секвенсор в духе Roland TB‑303: один HTML-файл, работает офлайн, ставится на экран «Домой». Внутри 32 готовых пресета (паттерн + темп + звук), рандом, экспорт WAV и MIDI, встроенная справка на русском и английском (кнопка `?`). Сборка: `python3 build.py`.
