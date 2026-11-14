@@ -6,6 +6,7 @@
 src/css/*.css  -> concatenated in filename order into <style>
 src/fonts/*    -> wordmark font (Inter Display, subset), inlined into the CSS as base64
 src/worklet.js -> AudioWorklet DSP (its source text is turned into a Blob at runtime)
+src/icons/*    -> app icon (icon-512.png is inlined for the PWA manifest / apple-touch-icon)
 src/js/*.js    -> concatenated in filename order inside one IIFE (shared scope)
 """
 import base64
@@ -27,6 +28,8 @@ def inline_font(m):
     return 'url(data:font/woff;base64,' + data + ')'
 css = re.sub(r'url\(fonts/([\w.-]+\.woff)\)', inline_font, css)
 app = cat('js', '.js')
+icon = 'data:image/png;base64,' + base64.b64encode((src / 'icons' / 'icon-512.png').read_bytes()).decode()
+app = app.replace('/*{{ICON}}*/', icon)
 worklet = (src / 'worklet.js').read_text()
 # drop the node-only export used by the offline test renderer
 worklet = re.sub(r"\nif \(typeof module.*\n?", "\n", worklet)

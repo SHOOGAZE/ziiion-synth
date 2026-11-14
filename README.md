@@ -2,7 +2,9 @@
 
 A pocket bass-line synthesizer and step sequencer for the phone browser — a skeuomorphic homage to the classic Roland TB-303 / TB-03 panel. One HTML file, no dependencies, works offline as a PWA.
 
-**[▶ Open the app](https://shoogaze.github.io/zion303/](https://shoogaze.github.io/zion-bass-303/)
+**▶ Live demo: https://shoogaze.github.io/zion-bass-303/**
+
+Open it on your phone or computer, tap once to start the audio. Add to Home Screen to use it as an app.
 
 > ZION 303 is an independent project inspired by the TB-303 design. It is not affiliated with or endorsed by Roland. "Roland" and "TB-303" are trademarks of their respective owners.
 
@@ -21,6 +23,12 @@ A pocket bass-line synthesizer and step sequencer for the phone browser — a sk
 - **Export** — WAV loop (with effect tails) and MIDI file (accents as velocity, slides as legato).
 - **Interface** — red 7-segment BPM display, tap tempo, multi-touch keys, built-in tutorial in English and Russian (`?` button, RU / EN switch), portrait mode rotates the panel.
 - **PWA** — add to Home Screen on iPhone / Android; works offline after the first visit.
+
+## Install on iPhone
+
+1. Open the live demo in Safari.
+2. Share → **Add to Home Screen**.
+3. Launch it from the icon: fullscreen, works offline. Turn the phone sideways (portrait rotates the panel automatically).
 
 ## Quick start
 
@@ -47,6 +55,7 @@ src/
     80-tutorial 85-export 90-logic 92-live-keys 93-leds 94-computer-keyboard
     96-pwa 99-boot
   fonts/            wordmark font (subset) + its licence
+  icons/            app icon (svg + 180/192/512 png; 512 is inlined at build)
 tests/              Playwright smoke tests (UI logic, export)
 screenshots/
 ```
@@ -73,11 +82,25 @@ Set `CHROME_PATH` to use a system Chrome instead of Playwright's browser.
 
 ## Deploy to GitHub Pages
 
-Push the repository, then Settings → Pages → Deploy from a branch → `main` / root. `.nojekyll` is included.
+The repository is `SHOOGAZE/zion-bass-303`. Push it, then Settings → Pages → Deploy from a branch → `main` / root. `.nojekyll` is included.
 
 ## Fonts
 
 Panel text uses the system Helvetica Neue / Arial stack. The ZION wordmark uses Inter Display Black Italic (Latin subset, embedded), © The Inter Project Authors, SIL Open Font License 1.1 — see `src/fonts/LICENSE-Inter.txt`.
+
+## Controls at a glance
+
+| Control | What it does |
+|---|---|
+| RUN/STOP | start / stop playback |
+| MODE knob | track / pattern, play / write |
+| PATT. GROUP, A/B, SELECTOR | choose the pattern |
+| Keys, WRITE/NEXT, BACK | enter notes step by step |
+| DOWN / UP, ACCENT, SLIDE | step flags |
+| FUNCTION + step / SELECTOR / BACK | length, undo, copy, paste |
+| LIB | presets, random, your own presets |
+
+Full walkthrough: the `?` button inside the app.
 
 ## License
 
