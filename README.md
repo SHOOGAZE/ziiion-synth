@@ -102,10 +102,6 @@ Panel text uses the system Helvetica Neue / Arial stack. The ZION wordmark uses 
 
 Full walkthrough: the `?` button inside the app.
 
-## License
-
-MIT © Kirill Kinderhart (code). Embedded font: see above.
-
 ---
 
 ## По-русски
