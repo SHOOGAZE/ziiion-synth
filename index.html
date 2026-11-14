@@ -987,7 +987,7 @@ lab('POCKET BASS SEQUENCER', 744, 197, { s: 9.5, w: 800, ls: .1 });
 lab('TEMPO', 608, 199, { cls: 'sm' });
 /* ---- language (RU / EN) ---- */
 let LANG = 'en';
-try { LANG = localStorage.getItem('pb303.lang') || (/^(ru|uk|be)/i.test(navigator.language || '') ? 'ru' : 'en'); } catch (e) { /* ignore */ }
+try { LANG = localStorage.getItem('pb303.lang') || 'en'; } catch (e) { /* ignore */ }
 const T = (r, e) => (LANG === 'ru' ? r : e);
 /* ---- LIBRARY (sequences + sound presets) ---- */
 const LIB = [

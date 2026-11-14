@@ -8,9 +8,9 @@ A pocket bass-line synthesizer and step sequencer for the phone browser — a sk
 
 ![ZION 303 panel](screenshots/panel.png)
 
-| Library | Tutorial (EN) | Tutorial (RU) |
+| Library | Tutorial: writing | Tutorial: start |
 |---|---|---|
-| ![Library](screenshots/library.png) | ![Tutorial EN](screenshots/tutorial-en-write.png) | ![Tutorial RU](screenshots/tutorial-ru-write.png) |
+| ![Library](screenshots/library.png) | ![Tutorial EN](screenshots/tutorial-en-write.png) | ![Tutorial EN](screenshots/tutorial-en-start.png) |
 
 ## Features
 
