@@ -1,0 +1,23 @@
+:root{--ink:#25262a;--ink2:#4b4d55;--led-off:#4a1313}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-behavior:none;touch-action:none;
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+#desk{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 38%,#272a31 0%,#101115 62%,#07080a 100%)}
+#stage{position:absolute;left:0;top:0;width:1000px;height:500px;transform-origin:0 0;will-change:transform}
+#chassis{position:absolute;inset:0;border-radius:18px;overflow:hidden;
+  background:linear-gradient(180deg,#d9dbe0 0%,#cdd0d6 40%,#c3c6cd 100%);
+  box-shadow:0 0 0 1px #62656d,0 0 0 4px #aeb1b9,0 0 0 5px #6b6e76,0 34px 46px rgba(0,0,0,.65),0 8px 14px rgba(0,0,0,.5)}
+#chassis::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.55;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .2  0 0 0 0 .2  0 0 0 0 .22  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#chassis::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;z-index:50;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.75),inset 0 -3px 5px rgba(0,0,0,.28),inset 3px 0 4px rgba(255,255,255,.25),inset -3px 0 4px rgba(0,0,0,.14)}
+.band{position:absolute;left:0;right:0}
+.groove{position:absolute;left:0;right:0;height:3px;background:#3b3c42;box-shadow:0 1px 0 rgba(255,255,255,.65),0 -1px 0 rgba(0,0,0,.3)}
+.vline{position:absolute;width:2px;background:#3b3c42;box-shadow:1px 0 0 rgba(255,255,255,.6)}
+
+.lab{position:absolute;white-space:nowrap;font:700 9.5px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.07em;
+  color:var(--ink);text-transform:uppercase;pointer-events:none;transform:translate(-50%,-50%)}
+.lab.sm{font-size:9px;letter-spacing:.06em}
+.lab.lg{font-size:11px}
+.brk{position:absolute;border:1.5px solid var(--ink);border-bottom:none;height:5px;pointer-events:none}

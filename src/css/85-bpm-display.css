@@ -1,0 +1,7 @@
+/* LED display */
+.lcd{position:absolute;border-radius:5px;background:#0a0405;box-shadow:0 0 0 1px #3a3b42,0 1px 0 1px rgba(255,255,255,.6),inset 0 2px 5px #000}
+.lcd .sg{fill:#1b0b09}
+.lcd .sg.x{opacity:0}
+.lcd .sg.on{fill:#ff5a3c;filter:drop-shadow(0 0 2px rgba(255,70,40,.85))}
+
+.mark.zion{font-size:38px;letter-spacing:-.045em}
