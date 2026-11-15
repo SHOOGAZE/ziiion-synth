@@ -4,11 +4,11 @@ function schem(marks) {
   let h = '<svg viewBox="0 0 1000 500" class="schem"><rect x="4" y="4" width="992" height="492" rx="26" fill="#dcdee3" stroke="#62656d" stroke-width="4"/>' +
     '<line x1="8" x2="992" y1="96" y2="96" stroke="#3b3c42" stroke-width="3"/><line x1="8" x2="992" y1="226" y2="226" stroke="#3b3c42" stroke-width="3"/>';
   const circ = (x, y, r, f) => '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + (f || '#2a2c32') + '"/>';
-  [301, 381, 460, 540, 619, 698].forEach(x => { h += circ(x, 58, 24); });
+  [301, 381, 460, 540, 619, 698].forEach(x => { h += circ(x, 58, 24, '#8f929b') + circ(x, 58, 18, '#e6e7ea'); });
   [130, 772, 822, 872].forEach(x => { h += '<rect x="' + (x - 24) + '" y="38" width="48" height="18" rx="4" fill="#2a2c32"/>'; });
   [50, 210, 920, 966].forEach(x => { h += circ(x, 46, 12, '#8d909a'); });
   h += '<text x="744" y="176" text-anchor="middle" font-family="ZionMark,Helvetica,Arial" font-weight="900" font-style="italic" font-size="34" fill="#25262a">ZION 303</text>';
-  [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += circ(k[0], k[1], k[2]); });
+  [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += circ(k[0], k[1], k[2], '#8f929b') + circ(k[0], k[1], k[2] * 0.76, '#e6e7ea'); });
   h += '<rect x="566" y="150" width="82" height="38" rx="5" fill="#120707"/><text x="607" y="180" text-anchor="middle" font-family="Courier New,monospace" font-weight="700" font-size="26" fill="#ff5436">128.0</text>';
   [[24, 261, 100, 31, '#6f727d'], [134, 261, 100, 31, '#6f727d'], [24, 323, 210, 46, '#f1f1f3'], [24, 415, 100, 31, '#f1f1f3'], [134, 415, 100, 31, '#f1f1f3']]
     .forEach(r => { h += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + r[2] + '" height="' + r[3] + '" rx="5" fill="' + r[4] + '" stroke="#80838b" stroke-width="2"/>'; });
@@ -27,8 +27,11 @@ function schem(marks) {
 }
 function modeSvg() {
   const pos = [[-135, 'TRACK WRITE', 'нижний левый'], [-45, 'TRACK PLAY', 'верхний левый'], [45, 'PATTERN PLAY', 'верхний правый'], [135, 'PATTERN WRITE', 'нижний правый']];
-  let h = '<svg viewBox="0 0 300 200" class="modesvg"><circle cx="150" cy="100" r="40" fill="#2a2c32"/><circle cx="150" cy="100" r="29" fill="#44464e"/>' +
-    '<polygon points="150,66 156,92 144,92" fill="#f4f3ee" transform="rotate(135 150 100)"/>';
+  let h = '<svg viewBox="-5 0 320 200" class="modesvg"><defs><radialGradient id="mk" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#fafafa"/><stop offset="1" stop-color="#b4b7bf"/></radialGradient></defs>' +
+    '<circle cx="150" cy="104" r="42" fill="#000" opacity=".25"/><circle cx="150" cy="100" r="41" fill="#8f929b"/>' +
+    '<circle cx="150" cy="100" r="36.5" fill="none" stroke="#555861" stroke-width="7" stroke-dasharray="1.6 2.2"/>' +
+    '<circle cx="150" cy="100" r="31" fill="url(#mk)" stroke="#9a9da6" stroke-width="1.5"/>' +
+    '<line x1="150" y1="100" x2="150" y2="76" stroke="#25262a" stroke-width="4.5" stroke-linecap="round" transform="rotate(135 150 100)"/>';
   pos.forEach((p, i) => {
     const a = p[0] * Math.PI / 180, x = 150 + 56 * Math.sin(a), y = 100 - 56 * Math.cos(a);
     const tx = 150 + 64 * Math.sin(a), ty = 100 - 64 * Math.cos(a);
