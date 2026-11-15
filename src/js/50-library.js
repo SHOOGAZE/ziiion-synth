@@ -120,13 +120,15 @@ libEl.innerHTML =
   '<span class="lb done" data-a="close">ГОТОВО</span></div>' +
   '<div class="ll"></div>' +
   '<div class="lf"><input class="ln" maxlength="18" placeholder="имя пресета" autocomplete="off" autocapitalize="characters">' +
-  '<span class="lb" data-a="save">СОХРАНИТЬ ТЕКУЩЕЕ</span><span class="lb" data-a="exp">ЭКСПОРТ</span><span class="lb" data-a="imp">ИМПОРТ</span>' +
+  '<span class="lb" data-a="save">СОХРАНИТЬ ТЕКУЩЕЕ</span><span class="lb" data-a="exp">ЭКСПОРТ</span><span class="lb" data-a="imp">ИМПОРТ</span><span class="lb" data-a="lite"></span>' +
   '<input type="file" class="lfile" accept=".json,application/json" hidden></div>';
 const LIBTXT = [['[data-o=pat]', 'ПАТТЕРН', 'PATTERN'], ['[data-o=snd]', 'ЗВУК', 'SOUND'], ['[data-a=rnd]', 'РАНДОМ', 'RANDOM'], ['[data-a=undo]', 'ОТМЕНИТЬ', 'REVERT'],
   ['[data-a=close]', 'ГОТОВО', 'DONE'], ['[data-a=save]', 'СОХРАНИТЬ ТЕКУЩЕЕ', 'SAVE CURRENT'], ['[data-a=exp]', 'ЭКСПОРТ', 'EXPORT'], ['[data-a=imp]', 'ИМПОРТ', 'IMPORT']];
+const liteLabel = () => { const e = libEl.querySelector('[data-a=lite]'); if (e) e.textContent = T('ЛАЙТ: ', 'LITE: ') + (LITE ? T('ВКЛ', 'ON') : T('ВЫКЛ', 'OFF')); };
 const libList = libEl.querySelector('.ll'), libName = libEl.querySelector('.ln'), libFile = libEl.querySelector('.lfile');
 
 function libLang() {
+  liteLabel();
   LIBTXT.forEach(r => { const e = libEl.querySelector(r[0]); if (e) e.textContent = T(r[1], r[2]); });
   libName.placeholder = T('имя пресета', 'preset name');
 }
@@ -188,6 +190,7 @@ libEl.addEventListener('click', ev => {
     download('zion303-presets.json', JSON.stringify(userLib, null, 1), 'application/json');
   }
   else if (a === 'imp') libFile.click();
+  else if (a === 'lite') { setLite(!LITE); liteLabel(); osd(LITE ? T('ЛАЙТ-РЕЖИМ ВКЛ', 'LITE MODE ON') : T('ЛАЙТ-РЕЖИМ ВЫКЛ', 'LITE MODE OFF')); }
 });
 libFile.addEventListener('change', () => {
   const f = libFile.files[0]; if (!f) return;

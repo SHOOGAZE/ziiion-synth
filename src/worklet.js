@@ -3,7 +3,7 @@
 // and so Node tests can run it with mocked globals.
 function workletMain() {
   const TWO_PI = Math.PI * 2;
-  const OS = 4; // filter oversampling
+  let OS = 4; // filter oversampling (2 in lite mode)
 
   function tanhf(x) {
     if (x < -3) return -1;
@@ -76,6 +76,7 @@ function workletMain() {
       switch (m.t) {
         case 'p': Object.assign(this.tp, m.p); if (m.snap) Object.assign(this.sp, m.p); break;
         case 'bpm': this.bpm = m.v; break;
+        case 'lite': OS = m.v ? 2 : 4; break;
         case 'seq':
           if (m.at === 'bar' && this.run && this.seq.length) this.pending = m.seq;
           else { this.seq = m.seq; this.pending = null; if (this.idx >= this.seq.length) this.idx = 0; }

@@ -192,6 +192,13 @@ svg polyline{stroke:var(--ink)}
 .screw::after{content:"";position:absolute;left:2px;right:2px;top:6px;height:2px;border-radius:1px;background:#3d3f46;
   box-shadow:0 1px 0 rgba(255,255,255,.5);transform:rotate(var(--r,0deg))}
 .etch{position:absolute;width:48px;height:2px;background:#6b6e77;box-shadow:0 1px 0 rgba(255,255,255,.75)}
+/* lite mode: cheaper rendering for older phones */
+html.lite #chassis::after,html.lite .sheen{display:none}
+html.lite #chassis{box-shadow:0 0 0 1px #62656d,0 0 0 4px var(--edge),0 0 0 5px #6b6e76,0 10px 16px rgba(0,0,0,.5)}
+html.lite .kshadow{filter:none;background:radial-gradient(circle,rgba(0,0,0,.4) 50%,rgba(0,0,0,0) 72%)}
+html.lite #power{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(8,9,12,.94)}
+html.lite #power .pw svg,html.lite .lcd .sg.on,html.lite #help .fig .schem{filter:none}
+html.lite .knob.st .krot{transition:none}
 /* library sheet — brushed-grey like the synth */
 [data-id=lib]{font:800 12px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em}
 #lib{position:absolute;inset:0;z-index:68;border-radius:18px;background:linear-gradient(180deg,#d9dbe0 0%,#cdd0d6 40%,#c3c6cd 100%);
@@ -279,7 +286,7 @@ svg polyline{stroke:var(--ink)}
 // and so Node tests can run it with mocked globals.
 function workletMain() {
   const TWO_PI = Math.PI * 2;
-  const OS = 4; // filter oversampling
+  let OS = 4; // filter oversampling (2 in lite mode)
 
   function tanhf(x) {
     if (x < -3) return -1;
@@ -352,6 +359,7 @@ function workletMain() {
       switch (m.t) {
         case 'p': Object.assign(this.tp, m.p); if (m.snap) Object.assign(this.sp, m.p); break;
         case 'bpm': this.bpm = m.v; break;
+        case 'lite': OS = m.v ? 2 : 4; break;
         case 'seq':
           if (m.at === 'bar' && this.run && this.seq.length) this.pending = m.seq;
           else { this.seq = m.seq; this.pending = null; if (this.idx >= this.seq.length) this.idx = 0; }
@@ -779,7 +787,13 @@ function pushSeq(at) {
   playMap = b.map;
   send({ t: 'seq', seq: b.seq, at: at || 'now' });
 }
+// lite mode: lighter graphics (no grain / blur / glows) and 2x filter oversampling
+let LITE = false;
+try { const sv = localStorage.getItem('pb303.lite'); LITE = sv === null ? /iPhone/.test(navigator.userAgent) : sv === '1'; } catch (e) { /* ignore */ }
+function applyLite() { document.documentElement.classList.toggle('lite', LITE); send({ t: 'lite', v: LITE ? 1 : 0 }); }
+function setLite(v) { LITE = !!v; try { localStorage.setItem('pb303.lite', LITE ? '1' : '0'); } catch (e) { /* ignore */ } applyLite(); }
 function syncAll() {
+  applyLite();
   send(paramMsg());
   send({ t: 'bpm', v: bpmOf(S.k.tempo) });
   pushSeq('now');
@@ -875,13 +889,23 @@ function mkKnob(o) {
   if (n) v = Math.round(clamp(v, 0, 1) * (n - 1)) / (n - 1);
   const api = { el: k, get value() { return v; }, get index() { return n ? Math.round(v * (n - 1)) : 0; } };
   function render() { const t = 'rotate(' + (n ? o.angles[api.index] : -135 + v * 270) + 'deg)'; rotA.style.transform = t; rotB.style.transform = t; }
-  api.set = function (nv, silent) {
+  let target = v, raf = 0;
+  function setV(nv, silent) {
     nv = clamp(nv, 0, 1);
     if (n) nv = Math.round(nv * (n - 1)) / (n - 1);
     const changed = nv !== v;
     v = nv; render();
     if (!silent && changed && o.onChange) o.onChange(v, api);
-  };
+  }
+  api.set = function (nv, silent) { if (!n) target = clamp(nv, 0, 1); setV(nv, silent); };
+  // knob "weight": the value chases the finger with a little inertia, rendered once per frame
+  function tick() {
+    raf = 0;
+    const dlt = target - v;
+    if (Math.abs(dlt) < 0.0006) { setV(target); return; }
+    setV(v + dlt * 0.4);
+    raf = requestAnimationFrame(tick);
+  }
   api.setIndex = (i, silent) => api.set(n > 1 ? i / (n - 1) : 0, silent);
   render();
 
@@ -890,7 +914,8 @@ function mkKnob(o) {
     e.preventDefault();
     if (drag) return;
     try { k.setPointerCapture(e.pointerId); } catch (_) { }
-    drag = { id: e.pointerId, x: e.clientX, y: e.clientY, v0: v, i0: api.index, moved: false };
+    target = v;
+    drag = { id: e.pointerId, x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: e.timeStamp, v0: v, i0: api.index, moved: false };
     k.classList.add('active');
   });
   k.addEventListener('pointermove', e => {
@@ -899,8 +924,13 @@ function mkKnob(o) {
     if (Math.abs(dx) + Math.abs(dy) > 5) drag.moved = true;
     if (!drag.moved) return;
     const l = toLocal(dx, dy);
-    if (n) api.setIndex(clamp(drag.i0 + Math.round(-l.y / 30), 0, n - 1));
-    else api.set(drag.v0 - l.y / 150);
+    if (n) { api.setIndex(clamp(drag.i0 + Math.round(-l.y / 30), 0, n - 1)); return; }
+    // resistance: slow drags are fine (1 / 300 px), fast drags are coarse (1 / 130 px)
+    const st = toLocal(e.clientX - drag.lx, e.clientY - drag.ly), dt = Math.max(1, e.timeStamp - drag.lt);
+    const sp = Math.abs(st.y) / dt, k = Math.min(1, Math.max(0, (sp - 0.12) / 1.0));
+    target = clamp(target - st.y * (1 / 300 + k * (1 / 130 - 1 / 300)), 0, 1);
+    drag.lx = e.clientX; drag.ly = e.clientY; drag.lt = e.timeStamp;
+    if (!raf) raf = requestAnimationFrame(tick);
   });
   const end = e => {
     if (!drag || e.pointerId !== drag.id) return;
@@ -1123,13 +1153,15 @@ libEl.innerHTML =
   '<span class="lb done" data-a="close">ГОТОВО</span></div>' +
   '<div class="ll"></div>' +
   '<div class="lf"><input class="ln" maxlength="18" placeholder="имя пресета" autocomplete="off" autocapitalize="characters">' +
-  '<span class="lb" data-a="save">СОХРАНИТЬ ТЕКУЩЕЕ</span><span class="lb" data-a="exp">ЭКСПОРТ</span><span class="lb" data-a="imp">ИМПОРТ</span>' +
+  '<span class="lb" data-a="save">СОХРАНИТЬ ТЕКУЩЕЕ</span><span class="lb" data-a="exp">ЭКСПОРТ</span><span class="lb" data-a="imp">ИМПОРТ</span><span class="lb" data-a="lite"></span>' +
   '<input type="file" class="lfile" accept=".json,application/json" hidden></div>';
 const LIBTXT = [['[data-o=pat]', 'ПАТТЕРН', 'PATTERN'], ['[data-o=snd]', 'ЗВУК', 'SOUND'], ['[data-a=rnd]', 'РАНДОМ', 'RANDOM'], ['[data-a=undo]', 'ОТМЕНИТЬ', 'REVERT'],
   ['[data-a=close]', 'ГОТОВО', 'DONE'], ['[data-a=save]', 'СОХРАНИТЬ ТЕКУЩЕЕ', 'SAVE CURRENT'], ['[data-a=exp]', 'ЭКСПОРТ', 'EXPORT'], ['[data-a=imp]', 'ИМПОРТ', 'IMPORT']];
+const liteLabel = () => { const e = libEl.querySelector('[data-a=lite]'); if (e) e.textContent = T('ЛАЙТ: ', 'LITE: ') + (LITE ? T('ВКЛ', 'ON') : T('ВЫКЛ', 'OFF')); };
 const libList = libEl.querySelector('.ll'), libName = libEl.querySelector('.ln'), libFile = libEl.querySelector('.lfile');
 
 function libLang() {
+  liteLabel();
   LIBTXT.forEach(r => { const e = libEl.querySelector(r[0]); if (e) e.textContent = T(r[1], r[2]); });
   libName.placeholder = T('имя пресета', 'preset name');
 }
@@ -1191,6 +1223,7 @@ libEl.addEventListener('click', ev => {
     download('zion303-presets.json', JSON.stringify(userLib, null, 1), 'application/json');
   }
   else if (a === 'imp') libFile.click();
+  else if (a === 'lite') { setLite(!LITE); liteLabel(); osd(LITE ? T('ЛАЙТ-РЕЖИМ ВКЛ', 'LITE MODE ON') : T('ЛАЙТ-РЕЖИМ ВЫКЛ', 'LITE MODE OFF')); }
 });
 libFile.addEventListener('change', () => {
   const f = libFile.files[0]; if (!f) return;

@@ -39,7 +39,13 @@ function pushSeq(at) {
   playMap = b.map;
   send({ t: 'seq', seq: b.seq, at: at || 'now' });
 }
+// lite mode: lighter graphics (no grain / blur / glows) and 2x filter oversampling
+let LITE = false;
+try { const sv = localStorage.getItem('pb303.lite'); LITE = sv === null ? /iPhone/.test(navigator.userAgent) : sv === '1'; } catch (e) { /* ignore */ }
+function applyLite() { document.documentElement.classList.toggle('lite', LITE); send({ t: 'lite', v: LITE ? 1 : 0 }); }
+function setLite(v) { LITE = !!v; try { localStorage.setItem('pb303.lite', LITE ? '1' : '0'); } catch (e) { /* ignore */ } applyLite(); }
 function syncAll() {
+  applyLite();
   send(paramMsg());
   send({ t: 'bpm', v: bpmOf(S.k.tempo) });
   pushSeq('now');

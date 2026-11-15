@@ -22,6 +22,7 @@ Open it on your phone or computer, tap once to start the audio. Add to Home Scre
 - **Library** — 32 musical presets (pattern + tempo + sound) across Acid, Techno, House, Electro, Rave, Dub and Ambient, a random generator, your own saved presets with JSON import / export.
 - **Export** — WAV loop (with effect tails) and MIDI file (accents as velocity, slides as legato).
 - **Interface** — red 7-segment BPM display, tap tempo, multi-touch keys, built-in tutorial in English and Russian (`?` button, RU / EN switch), portrait mode rotates the panel.
+- **Performance** — knobs have some weight (slow drags are fine-grained, fast ones coarse). **LITE mode** (LIB → LITE) drops the grain texture, blurs and glows and halves the filter oversampling; it is on by default on iPhone.
 - **PWA** — add to Home Screen on iPhone / Android; works offline after the first visit.
 
 ## Install on iPhone
