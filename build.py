@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Build ZION 303 into a single self-contained index.html.
+"""Build ZIIION into a single self-contained index.html.
 
     python3 build.py
 
 src/css/*.css  -> concatenated in filename order into <style>
-src/fonts/*    -> wordmark font (Inter Display, subset), inlined into the CSS as base64
 src/worklet.js -> AudioWorklet DSP (its source text is turned into a Blob at runtime)
 src/icons/*    -> app icon (icon-512.png is inlined for the PWA manifest / apple-touch-icon)
 src/js/*.js    -> concatenated in filename order inside one IIFE (shared scope)
@@ -22,11 +21,6 @@ def cat(folder, ext):
 
 
 css = cat('css', '.css')
-# inline fonts as data URIs so the app stays a single file
-def inline_font(m):
-    data = base64.b64encode((src / 'fonts' / m.group(1)).read_bytes()).decode()
-    return 'url(data:font/woff;base64,' + data + ')'
-css = re.sub(r'url\(fonts/([\w.-]+\.woff)\)', inline_font, css)
 app = cat('js', '.js')
 icon = 'data:image/png;base64,' + base64.b64encode((src / 'icons' / 'icon-512.png').read_bytes()).decode()
 app = app.replace('/*{{ICON}}*/', icon)
@@ -36,6 +30,5 @@ worklet = re.sub(r"\nif \(typeof module.*\n?", "\n", worklet)
 
 html = (src / 'template.html').read_text()
 html = html.replace('/*{{CSS}}*/', css).replace('/*{{WORKLET}}*/', worklet).replace('/*{{APP}}*/', app)
-out = root / 'index.html'
-out.write_text(html)
-print('built', out.name, len(html), 'bytes')
+(root / 'index.html').write_text(html)
+print('built index.html', len(html), 'bytes')

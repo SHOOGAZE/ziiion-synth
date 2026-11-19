@@ -1,14 +1,14 @@
-# ZION 303
+# ZIIION
 
-A pocket bass-line synthesizer and step sequencer for the phone browser — a skeuomorphic homage to the classic Roland TB-303 / TB-03 panel. One HTML file, no dependencies, works offline as a PWA.
+A pocket bass-line synthesizer and step sequencer for the phone browser — styled as a transparent-polycarbonate case over a visible PCB, with a dot-matrix display and a single red accent, after the classic Roland TB-303 / TB-03 layout. One HTML file, no dependencies, works offline as a PWA.
 
-**▶ Live demo: https://shoogaze.github.io/zion-bass-303/**
+**▶ Live demo: https://shoogaze.github.io/ziiion-synth/**
 
 Open it on your phone or computer, tap once to start the audio. Add to Home Screen to use it as an app.
 
-> ZION 303 is an independent project inspired by the TB-303 design. It is not affiliated with or endorsed by Roland. "Roland" and "TB-303" are trademarks of their respective owners.
+> ZIIION is an independent project inspired by the TB-303 design. It is not affiliated with or endorsed by Roland. "Roland" and "TB-303" are trademarks of their respective owners.
 
-![ZION 303 panel](screenshots/panel.png)
+![ZIIION panel](screenshots/panel.png)
 
 | Library | Tutorial: writing | Tutorial: start |
 |---|---|---|
@@ -21,8 +21,8 @@ Open it on your phone or computer, tap once to start the audio. Add to Home Scre
 - **Effects** — distortion, ping-pong delay (3/16), stereo reverb.
 - **Library** — 32 musical presets (pattern + tempo + sound) across Acid, Techno, House, Electro, Rave, Dub and Ambient, a random generator, your own saved presets with JSON import / export.
 - **Export** — WAV loop (with effect tails) and MIDI file (accents as velocity, slides as legato).
-- **Interface** — red 7-segment BPM display, tap tempo, multi-touch keys, built-in tutorial in English and Russian (`?` button, RU / EN switch), portrait mode rotates the panel.
-- **Performance** — knobs have some weight (slow drags are fine-grained, fast ones coarse). **LITE mode** (LIB → LITE) drops the grain texture, blurs and glows and halves the filter oversampling; it is on by default on iPhone.
+- **Interface** — dot-matrix display (tempo, mode, pattern, current note, knob values, step strip), tap tempo, multi-touch keys, built-in tutorial in English and Russian (`?` button, RU / EN switch), portrait mode rotates the panel.
+- **Performance** — knobs have some weight (slow drags are fine-grained, fast ones coarse). **LITE mode** (LIB → LITE) drops the blurs, shadows and glows and halves the filter oversampling; it is on by default on iPhone.
 - **PWA** — add to Home Screen on iPhone / Android; works offline after the first visit.
 
 ## Install on iPhone
@@ -49,13 +49,12 @@ build.py            assembles src/ into index.html
 src/
   template.html     page shell
   worklet.js        AudioWorklet DSP: voice, filter, sequencer, delay, reverb
-  css/              styles, concatenated in filename order
+  css/              styles, concatenated in filename order (system fonts only)
   js/               app code, concatenated in filename order inside one scope
     00-core 05-view 10-data 20-engine 25-osd 30-chassis 35-knobs 40-buttons
-    45-top-band 48-i18n 50-library 60-mid-band 65-bpm-display 70-bottom-band
+    45-top-band 48-i18n 50-library 60-mid-band 65-volume 70-bottom-band
     80-tutorial 85-export 90-logic 92-live-keys 93-leds 94-computer-keyboard
-    96-pwa 99-boot
-  fonts/            wordmark font (subset) + its licence
+    96-pwa 97-pcb-display 99-boot
   icons/            app icon (svg + 180/192/512 png; 512 is inlined at build)
 tests/              Playwright smoke tests (UI logic, export)
 screenshots/
@@ -83,11 +82,7 @@ Set `CHROME_PATH` to use a system Chrome instead of Playwright's browser.
 
 ## Deploy to GitHub Pages
 
-The repository is `SHOOGAZE/zion-bass-303`. Push it, then Settings → Pages → Deploy from a branch → `main` / root. `.nojekyll` is included.
-
-## Fonts
-
-Panel text uses the system Helvetica Neue / Arial stack. The ZION wordmark uses Inter Display Black Italic (Latin subset, embedded), © The Inter Project Authors, SIL Open Font License 1.1 — see `src/fonts/LICENSE-Inter.txt`.
+The repository is `SHOOGAZE/ziiion-synth`. Push it, then Settings → Pages → Deploy from a branch → `main` / root. `.nojekyll` is included.
 
 ## Controls at a glance
 
@@ -105,7 +100,7 @@ Full walkthrough: the `?` button inside the app.
 
 ## License
 
-MIT © Kirill Kinderhart (code). Embedded font: see above.
+MIT © Kirill Kinderhart.
 
 ---
 

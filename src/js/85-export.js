@@ -6,7 +6,7 @@ function download(name, bytes, type) {
 }
 function exportName(ext) {
   const nm = isTrackMode() ? 'track' + (S.trackSel + 1) : patName(patIdx());
-  return 'zion303-' + nm + '-' + bpmOf(S.k.tempo) + 'bpm.' + ext;
+  return 'ziiion-' + nm + '-' + bpmOf(S.k.tempo) + 'bpm.' + ext;
 }
 function wavBytes(buf) {
   const n = buf.length, ch = [buf.getChannelData(0), buf.getChannelData(1)];
@@ -66,7 +66,7 @@ function midiBytes() {
   const tr = [];
   const us = Math.round(60000000 / bpm);
   tr.push(0, 0xFF, 0x51, 3, (us >> 16) & 255, (us >> 8) & 255, us & 255);
-  const name = 'ZION 303 ' + (isTrackMode() ? 'track ' + (S.trackSel + 1) : patName(patIdx()));
+  const name = 'ZIIION ' + (isTrackMode() ? 'track ' + (S.trackSel + 1) : patName(patIdx()));
   tr.push(0, 0xFF, 0x03, name.length); for (let i = 0; i < name.length; i++) tr.push(name.charCodeAt(i) & 127);
   let last = 0;
   ev.forEach(e => { vlq(e.t - last).forEach(x => tr.push(x)); last = e.t; tr.push(e.o ? 0x90 : 0x80, e.note, e.o ? e.vel : 0); });

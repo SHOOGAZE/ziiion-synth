@@ -187,7 +187,7 @@ libEl.addEventListener('click', ev => {
   }
   else if (a === 'exp') {
     if (!userLib.length) { osd(T('НЕТ СВОИХ ПРЕСЕТОВ', 'NO USER PRESETS')); return; }
-    download('zion303-presets.json', JSON.stringify(userLib, null, 1), 'application/json');
+    download('ziiion-presets.json', JSON.stringify(userLib, null, 1), 'application/json');
   }
   else if (a === 'imp') libFile.click();
   else if (a === 'lite') { setLite(!LITE); liteLabel(); osd(LITE ? T('ЛАЙТ-РЕЖИМ ВКЛ', 'LITE MODE ON') : T('ЛАЙТ-РЕЖИМ ВЫКЛ', 'LITE MODE OFF')); }

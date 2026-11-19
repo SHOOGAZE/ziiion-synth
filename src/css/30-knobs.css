@@ -1,25 +1,21 @@
-/* knobs — light-grey knurled caps with a dark pointer, after the Roland TB-03 */
+/* knobs: matte white caps with concentric rings and a red index */
 .knob{position:absolute;touch-action:none;cursor:ns-resize}
 .knob::before{content:"";position:absolute;inset:-12px;border-radius:50%}
 .kticks{position:absolute;pointer-events:none;overflow:visible}
+.kticks line{stroke:var(--ink2);stroke-width:2.4px;stroke-dasharray:.01 12;stroke-linecap:round}
 .kshadow{position:absolute;inset:-2%;border-radius:50%;transform:translate(6%,10%);pointer-events:none;
-  background:radial-gradient(circle,rgba(0,0,0,.5) 55%,rgba(0,0,0,0) 76%);filter:blur(2.4px)}
+  background:radial-gradient(circle,rgba(40,46,56,.26) 55%,rgba(0,0,0,0) 74%)}
 .kbase{position:absolute;inset:-5%;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,#7c7f88 0,#7c7f88 86%,#a9acb3 90%,#5c5f68 96%,rgba(0,0,0,0) 100%);
-  box-shadow:0 1px 0 rgba(255,255,255,.5)}
+  background:radial-gradient(circle,#c9cdd2 0,#c9cdd2 88%,#8f959e 93%,#e9ebee 97%,rgba(0,0,0,0) 100%)}
 .kbody{position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from -40deg,#f6f7f8 0deg,#c8cbd1 70deg,#9a9da6 150deg,#8b8e97 205deg,#bdc0c7 275deg,#f6f7f8 360deg);
-  box-shadow:0 2px 3px rgba(0,0,0,.6),0 0 0 1px #6a6d76,inset 0 0 0 1px rgba(255,255,255,.65)}
+  background:radial-gradient(circle at 40% 30%,#fff 0%,#eceef0 55%,#d6d9de 100%);
+  box-shadow:0 2px 4px rgba(50,56,66,.35),0 0 0 1px #a3a9b1,inset 0 0 0 1px rgba(255,255,255,.9)}
 .krot{position:absolute;inset:0;border-radius:50%;transition:transform .07s ease-out}
 .knob.st .krot{transition:transform .17s cubic-bezier(.3,1.55,.5,1)}
-.kridge{position:absolute;inset:0;border-radius:50%;
-  background:repeating-conic-gradient(from 0deg,rgba(255,255,255,.6) 0 1.6deg,rgba(40,42,50,.55) 1.6deg 3.2deg);
-  -webkit-mask:radial-gradient(circle,transparent 0,transparent 66%,#000 69%);mask:radial-gradient(circle,transparent 0,transparent 66%,#000 69%)}
-.kcap{position:absolute;inset:17%;border-radius:50%;
-  background:radial-gradient(circle at 36% 28%,#fbfbfc 0%,#e1e3e7 42%,#bfc2c9 100%);
-  box-shadow:inset 1.2px 1.4px 1px rgba(255,255,255,.95),inset -1.4px -1.8px 2px rgba(60,62,72,.55),0 1.5px 3px rgba(0,0,0,.55),0 0 0 .8px #8a8d96}
-.kind{position:absolute;left:50%;top:5%;width:5.2%;height:38%;transform:translateX(-50%);border-radius:2px;
-  background:linear-gradient(90deg,#34353b,#1d1e22);box-shadow:0 0 0 .5px rgba(255,255,255,.4)}
+.kcap{position:absolute;inset:15%;border-radius:50%;
+  background:repeating-radial-gradient(circle at 50% 50%,#f7f8f9 0 1.1px,#dfe2e6 1.1px 2.3px);
+  box-shadow:inset 0 0 0 1px #c3c8ce,inset 1px 1.5px 1px rgba(255,255,255,.9),0 1px 2px rgba(50,56,66,.35)}
+.kind{position:absolute;left:50%;top:3%;width:6.5%;height:22%;transform:translateX(-50%);border-radius:1px;background:var(--red)}
 .kgloss{position:absolute;inset:0;border-radius:50%;pointer-events:none;
-  background:radial-gradient(ellipse 50% 30% at 36% 19%,rgba(255,255,255,.35),rgba(255,255,255,0) 70%)}
+  background:radial-gradient(ellipse 50% 30% at 36% 19%,rgba(255,255,255,.55),rgba(255,255,255,0) 70%)}
 .knob.active .kshadow{transform:translate(4%,7%)}

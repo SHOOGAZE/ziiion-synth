@@ -1,6 +1,6 @@
 const path = require('path');
 const { chromium } = require('playwright');
-const PAGE = 'file://' + path.resolve(__dirname, '..', 'index.html');
+const PAGE = 'file://' + path.resolve(__dirname, '..', process.env.PAGE_FILE || 'index.html');
 const LAUNCH = { executablePath: process.env.CHROME_PATH || undefined, args: ['--autoplay-policy=no-user-gesture-required', '--no-sandbox'] };
 const results = []; const fails = [];
 const ok = (name, cond, extra) => { results.push((cond ? 'PASS ' : 'FAIL ') + name + (extra !== undefined ? '  ' + JSON.stringify(extra) : '')); if (!cond) fails.push(name); };

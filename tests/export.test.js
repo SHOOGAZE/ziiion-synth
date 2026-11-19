@@ -1,6 +1,6 @@
 const path = require('path');
 const { chromium } = require('playwright');
-const PAGE = 'file://' + path.resolve(__dirname, '..', 'index.html');
+const PAGE = 'file://' + path.resolve(__dirname, '..', process.env.PAGE_FILE || 'index.html');
 const LAUNCH = { executablePath: process.env.CHROME_PATH || undefined, args: ['--autoplay-policy=no-user-gesture-required', '--no-sandbox'] };
 const fs = require('fs');
 (async () => {
@@ -24,11 +24,11 @@ const fs = require('fs');
   // midi
   await page.evaluate(() => { PB.S.num = 0; });
   const mid = await page.evaluate(() => Array.from(PB.midiBytes()));
-  fs.writeFileSync(require('os').tmpdir() + '/zion-test.mid', Buffer.from(mid));
+  fs.writeFileSync(require('os').tmpdir() + '/ziiion-test.mid', Buffer.from(mid));
   // wav, delay on
   await page.evaluate(() => { PB.S.delay = 1; });
   const wav = await page.evaluate(async () => { const b = await PB.renderWav(); return Array.from(b); });
-  fs.writeFileSync(require('os').tmpdir() + '/zion-test.wav', Buffer.from(wav));
+  fs.writeFileSync(require('os').tmpdir() + '/ziiion-test.wav', Buffer.from(wav));
   // download path through help button
   await page.evaluate(() => document.querySelector('.helpbtn').dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerId: 3 })));
   await page.waitForTimeout(200); await page.evaluate(() => [...document.querySelectorAll('#help .tabs span')].find((t, i, a) => i === a.length - 1).click()); await page.waitForTimeout(150);

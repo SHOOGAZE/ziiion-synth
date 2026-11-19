@@ -1,27 +1,27 @@
-/* buttons */
-.slot{position:absolute;border-radius:6px;background:#a0a3ab;box-shadow:inset 0 2px 4px rgba(0,0,0,.55),0 1px 0 rgba(255,255,255,.7);pointer-events:none}
-.btn{position:absolute;border-radius:4px;touch-action:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  font:700 12px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.05em;color:var(--ink);
-  background:linear-gradient(180deg,#eeeff1 0%,#d3d5d9 50%,#bcbfc5 100%);
-  box-shadow:0 3px 0 #80838b,0 5px 7px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 2px rgba(0,0,0,.2),inset 1px 0 0 rgba(255,255,255,.5)}
+/* buttons: flat matte pads */
+.btn{position:absolute;border-radius:7px;touch-action:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font:700 12px/1 var(--mono);letter-spacing:.04em;color:var(--ink);
+  background:linear-gradient(180deg,#f6f7f8 0%,#eceef0 50%,#e2e5e8 100%);
+  box-shadow:0 2px 0 #a8aeb6,0 4px 6px rgba(50,56,66,.2),inset 0 0 0 1px #b8bdc4}
 .btn::before{content:"";position:absolute;inset:-14px -6px -10px -6px}
-.btn.down{transform:translateY(2.5px);box-shadow:0 .5px 0 #80838b,0 2px 3px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 2px rgba(0,0,0,.2)}
-.btn.dark{color:#f3f3ef;background:linear-gradient(180deg,#575a6b 0%,#3a3d4d 45%,#2a2c39 100%);
-  box-shadow:0 3px 0 #0e0f16,0 5px 7px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 2px rgba(0,0,0,.5)}
-.btn.dark.down{box-shadow:0 .5px 0 #0e0f16,0 2px 3px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2)}
-.btn.grey{background:linear-gradient(180deg,#8d909a 0%,#6f727d 50%,#5a5d68 100%);color:#fafafa;
-  box-shadow:0 3px 0 #2c2e36,0 5px 7px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 2px rgba(0,0,0,.35)}
-.btn.grey.down{box-shadow:0 .5px 0 #2c2e36,0 2px 3px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn.down{transform:translateY(1.5px);box-shadow:0 .5px 0 #a8aeb6,inset 0 0 0 1px #9aa0a8}
+.btn.dark{color:#f4f5f7;background:linear-gradient(180deg,#2a2c31 0%,#1d1f23 45%,#141518 100%);
+  box-shadow:0 2px 0 #000,0 4px 6px rgba(0,0,0,.3),inset 0 0 0 1px #3a3d44}
+.btn.dark.down{box-shadow:0 .5px 0 #000,inset 0 0 0 1px #3a3d44}
+.btn.grey{background:linear-gradient(180deg,#d3d7dc 0%,#c5cad0 50%,#b8bdc4 100%);
+  box-shadow:0 2px 0 #8b919a,0 4px 6px rgba(50,56,66,.2),inset 0 0 0 1px #aab0b8}
+.btn.grey.down{box-shadow:0 .5px 0 #8b919a,inset 0 0 0 1px #9aa0a8}
 .btn.run{font-size:13px}
-.btn .pip{position:absolute;left:50%;top:7px;width:16px;height:2px;margin-left:-8px;background:rgba(0,0,0,.35);border-radius:1px}
+.btn .pip{position:absolute;left:50%;top:7px;width:16px;height:2px;margin-left:-8px;background:rgba(0,0,0,.25);border-radius:1px}
 
 /* keys */
 .wkey,.bkey{position:absolute;touch-action:none;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;
-  font:700 9px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.05em}
-.wkey{border-radius:4px;color:#2a2b30;background:linear-gradient(180deg,#f2f2ef 0%,#dcdcd6 55%,#c6c6bf 100%);
-  box-shadow:0 4px 0 #85878f,0 6px 8px rgba(0,0,0,.4),inset 0 1px 0 #fff,inset 1px 0 0 rgba(255,255,255,.6),inset 0 -1px 2px rgba(0,0,0,.15)}
-.bkey{border-radius:4px;z-index:3;color:#e9e9e5;background:linear-gradient(180deg,#4d5164 0%,#33364a 50%,#23253a 100%);
-  box-shadow:0 4px 0 #0c0d15,0 6px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 2px rgba(0,0,0,.5)}
+  font:700 9px/1 var(--mono);letter-spacing:.04em;border-radius:6px}
+.wkey{color:var(--ink);background:linear-gradient(180deg,#fafafb 0%,#f0f1f3 55%,#e4e6e9 100%);
+  box-shadow:0 3px 0 #a4aab2,0 5px 7px rgba(50,56,66,.22),inset 0 0 0 1px #b3b9c1}
+.bkey{z-index:3;color:#f1f2f4;background:linear-gradient(180deg,#2b2d32 0%,#1f2125 50%,#151619 100%);
+  box-shadow:0 3px 0 #000,0 5px 7px rgba(0,0,0,.3),inset 0 0 0 1px #3a3d44}
 .wkey::before,.bkey::before{content:"";position:absolute;inset:-4px -2px -6px -2px}
-.wkey.down{transform:translateY(3px);box-shadow:0 1px 0 #85878f,0 3px 4px rgba(0,0,0,.4),inset 0 1px 0 #fff;background:linear-gradient(180deg,#e6e6e1,#cfcfc8)}
-.bkey.down{transform:translateY(3px);box-shadow:0 1px 0 #0c0d15,0 3px 4px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2)}
+.wkey.down{transform:translateY(3px);box-shadow:0 1px 0 #a4aab2,inset 0 0 0 1px #9aa0a8}
+.bkey.down{transform:translateY(3px);box-shadow:0 1px 0 #000,inset 0 0 0 1px #3a3d44}
+.slot{position:absolute;border-radius:6px;background:#cdd1d6;box-shadow:inset 0 1px 2px rgba(50,56,66,.35);pointer-events:none}

@@ -1,39 +1,39 @@
-/* library sheet — brushed-grey like the synth */
-[data-id=lib]{font:800 12px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.2em}
-#lib{position:absolute;inset:0;z-index:68;border-radius:18px;background:linear-gradient(180deg,#d9dbe0 0%,#cdd0d6 40%,#c3c6cd 100%);
- box-shadow:inset 0 0 0 1px #62656d,inset 0 0 0 4px #aeb1b9,inset 0 0 0 5px #6b6e76;color:#25262a;display:none;flex-direction:column;
- padding:22px 30px 20px;font:500 12px/1.3 "Helvetica Neue",Helvetica,Arial,sans-serif}
+/* library sheet — frosted plastic over the board */
+[data-id=lib]{font:800 12px/1 var(--mono);letter-spacing:.2em}
+#lib{position:absolute;inset:0;z-index:68;border-radius:18px;background-color:#e6e9ec;background-image:var(--sheet),var(--pcb);background-size:100% 100%;
+ box-shadow:inset 0 0 0 1px #8f959e,inset 0 0 0 4px #f4f5f7,inset 0 0 0 5px #8f959e;color:#1d1f24;display:none;flex-direction:column;
+ padding:22px 30px 20px;font:500 12px/1.3 var(--sans)}
 #lib.open{display:flex}
 #lib .lh,#lib .lf{display:flex;align-items:center;gap:9px;flex:0 0 auto}
-#lib .lh{margin-bottom:10px;padding-bottom:10px;border-bottom:2px solid #3b3c42}
-#lib .lf{margin-top:10px;padding-top:10px;border-top:2px solid #3b3c42}
-#lib .lt{font:900 italic 20px/1 "ZionMark","Helvetica Neue",Arial,sans-serif;letter-spacing:-.02em;color:#25262a;margin-right:auto}
-#lib .lb,#lib .tg{padding:10px 14px;border-radius:4px;background:linear-gradient(180deg,#eeeff1 0%,#d3d5d9 50%,#bcbfc5 100%);color:#25262a;
- font:800 10.5px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.14em;box-shadow:0 3px 0 #80838b,0 5px 6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.8);
+#lib .lh{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #8d939c}
+#lib .lf{margin-top:10px;padding-top:10px;border-top:1px solid #8d939c}
+#lib .lt{font:800 18px/1 var(--mono);letter-spacing:.16em;color:#1d1f24;margin-right:auto}
+#lib .lb,#lib .tg{padding:10px 14px;border-radius:4px;background:linear-gradient(180deg,#f6f7f8 0%,#eceef0 50%,#e2e5e8 100%);color:#1d1f24;
+ font:800 10.5px/1 var(--mono);letter-spacing:.14em;box-shadow:0 3px 0 #a8aeb6,0 5px 6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.8);
  cursor:pointer;user-select:none;-webkit-user-select:none}
-#lib .lb:active{transform:translateY(2px);box-shadow:0 1px 0 #80838b,0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.6)}
-#lib .tg{background:linear-gradient(180deg,#a9acb4,#9a9da6);color:#55575f;box-shadow:inset 0 2px 4px rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.5)}
-#lib .tg.on{background:linear-gradient(180deg,#575a6b,#3a3d4d);color:#f3f3ef;box-shadow:0 2px 0 #0e0f16,0 3px 5px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2)}
-#lib .lb.done{background:linear-gradient(180deg,#575a6b,#3a3d4d 55%,#2a2c39);color:#f3f3ef;box-shadow:0 3px 0 #0e0f16,0 5px 6px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.22)}
+#lib .lb:active{transform:translateY(2px);box-shadow:0 1px 0 #a8aeb6,0 2px 3px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.6)}
+#lib .tg{background:linear-gradient(180deg,#e0e3e7,#d3d7dc);color:#55575f;box-shadow:inset 0 0 0 1px #aab0b8}
+#lib .tg.on{background:linear-gradient(180deg,#2a2c31,#141518);color:#f4f5f7;box-shadow:0 2px 0 #000,0 3px 5px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.2)}
+#lib .lb.done{background:linear-gradient(180deg,#2a2c31,#1d1f23 55%,#141518);color:#f4f5f7;box-shadow:0 3px 0 #000,0 5px 6px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.22)}
 #lib .ll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;padding:2px 6px 8px 2px}
-#lib .gh{font:800 10px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.24em;color:#4b4d55;margin:10px 0 7px}
+#lib .gh{font:800 10px/1 var(--mono);letter-spacing:.24em;color:#4a4f58;margin:10px 0 7px}
 #lib .gr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 #lib .row{position:relative;display:flex;align-items:center;gap:10px;padding:8px 11px;border-radius:5px;cursor:pointer;
- background:linear-gradient(180deg,#e6e8ec,#cfd2d8);box-shadow:0 2px 0 #8d9098,0 3px 4px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.8)}
+ background:linear-gradient(180deg,#f8f9fa,#eceef0);box-shadow:0 2px 0 #a8aeb6,0 3px 4px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.8)}
 #lib .row:active{transform:translateY(1px)}
-#lib .row.cur{background:linear-gradient(180deg,#575a6b,#3a3d4d);box-shadow:0 2px 0 #0e0f16,0 3px 5px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.2)}
+#lib .row.cur{background:linear-gradient(180deg,#2a2c31,#141518);box-shadow:0 2px 0 #000,0 3px 5px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.2)}
 #lib .rt{flex:1;min-width:0}
-#lib .rt b{display:block;font:800 11.5px/1.15 "Helvetica Neue",Arial,sans-serif;letter-spacing:.07em;color:#25262a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#lib .rt span{font:700 9.5px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.1em;color:#5f616a}
-#lib .row.cur .rt b{color:#f3f3ef}#lib .row.cur .rt span{color:#b9bbc8}
+#lib .rt b{display:block;font:800 11.5px/1.15 var(--mono);letter-spacing:.07em;color:#1d1f24;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lib .rt span{font:700 9.5px/1 var(--mono);letter-spacing:.1em;color:#5f616a}
+#lib .row.cur .rt b{color:#f4f5f7}#lib .row.cur .rt span{color:#b9bbc8}
 #lib .mini{display:flex;align-items:flex-end;gap:1.5px;height:19px;flex:0 0 auto}
-#lib .mini i{display:block;width:3px;background:#4b4d55;border-radius:1px;min-height:2px}
-#lib .mini i.a{background:#d3200f}
+#lib .mini i{display:block;width:3px;background:#4a4f58;border-radius:1px;min-height:2px}
+#lib .mini i.a{background:#e8321e}
 #lib .mini i.r{height:2px;background:#9a9da6}
 #lib .mini i.t{height:5px;background:#7c7f89}
 #lib .row.cur .mini i{background:#c9cbd6}#lib .row.cur .mini i.a{background:#ff6a52}#lib .row.cur .mini i.r{background:#6a6d80}#lib .row.cur .mini i.t{background:#9395a6}
 #lib .row u{text-decoration:none;color:#5f616a;font:400 18px/1 Arial;padding:4px 2px 4px 6px}
 #lib .row.cur u{color:#c9cbd6}
-#lib .ln{flex:1;min-width:0;padding:9px 11px;border-radius:4px;border:0;background:#a0a3ab;color:#25262a;font:700 16px/1.2 "Helvetica Neue",Arial,sans-serif;
+#lib .ln{flex:1;min-width:0;padding:9px 11px;border-radius:4px;border:0;background:#a0a3ab;color:#1d1f24;font:700 16px/1.2 var(--sans);
  letter-spacing:.06em;box-shadow:inset 0 2px 4px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.6);outline:none}
 #lib .ln::placeholder{color:#5f616a}

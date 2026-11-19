@@ -3,22 +3,21 @@ const SVGNS = 'http://www.w3.org/2000/svg';
 function schem(marks) {
   let h = '<svg viewBox="0 0 1000 500" class="schem"><rect x="4" y="4" width="992" height="492" rx="26" fill="#dcdee3" stroke="#62656d" stroke-width="4"/>' +
     '<line x1="8" x2="992" y1="96" y2="96" stroke="#3b3c42" stroke-width="3"/><line x1="8" x2="992" y1="226" y2="226" stroke="#3b3c42" stroke-width="3"/>';
-  const circ = (x, y, r, f) => '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + (f || '#2a2c32') + '"/>';
+  const circ = (x, y, r, f) => '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + (f || '#17181b') + '"/>';
   [301, 381, 460, 540, 619, 698].forEach(x => { h += circ(x, 58, 24, '#8f929b') + circ(x, 58, 18, '#e6e7ea'); });
-  [130, 772, 822, 872].forEach(x => { h += '<rect x="' + (x - 24) + '" y="38" width="48" height="18" rx="4" fill="#2a2c32"/>'; });
+  [130, 772, 822, 872].forEach(x => { h += '<rect x="' + (x - 24) + '" y="38" width="48" height="18" rx="4" fill="#17181b"/>'; });
   [50, 210, 920, 966].forEach(x => { h += circ(x, 46, 12, '#8d909a'); });
-  h += '<text x="744" y="176" text-anchor="middle" font-family="ZionMark,Helvetica,Arial" font-weight="900" font-style="italic" font-size="34" fill="#25262a">ZION 303</text>';
   [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += circ(k[0], k[1], k[2], '#8f929b') + circ(k[0], k[1], k[2] * 0.76, '#e6e7ea'); });
-  h += '<rect x="566" y="150" width="82" height="38" rx="5" fill="#120707"/><text x="607" y="180" text-anchor="middle" font-family="Courier New,monospace" font-weight="700" font-size="26" fill="#ff5436">128.0</text>';
-  [[24, 261, 100, 31, '#6f727d'], [134, 261, 100, 31, '#6f727d'], [24, 323, 210, 46, '#f1f1f3'], [24, 415, 100, 31, '#f1f1f3'], [134, 415, 100, 31, '#f1f1f3']]
-    .forEach(r => { h += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + r[2] + '" height="' + r[3] + '" rx="5" fill="' + r[4] + '" stroke="#80838b" stroke-width="2"/>'; });
+  h += '<rect x="562" y="114" width="264" height="108" rx="10" fill="#070708"/><text x="574" y="140" font-family="Courier New,monospace" font-weight="700" font-size="22" fill="#f4f5f7">ZIIION</text><text x="812" y="150" text-anchor="end" font-family="Courier New,monospace" font-weight="700" font-size="52" fill="#f4f5f7">128</text><rect x="562" y="104" width="8" height="8" fill="#e8321e"/>';
+  [[24, 261, 100, 31, '#c5cad0'], [134, 261, 100, 31, '#c5cad0'], [24, 323, 210, 46, '#f6f7f8'], [24, 415, 100, 31, '#f6f7f8'], [134, 415, 100, 31, '#f6f7f8']]
+    .forEach(r => { h += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + r[2] + '" height="' + r[3] + '" rx="5" fill="' + r[4] + '" stroke="#a8aeb6" stroke-width="2"/>'; });
   for (let i = 0; i < 16; i++) h += circ(285 + i * 23.6, 251, 5, '#6a1c14');
-  [320, 367, 462, 509, 557].forEach(x => { h += '<rect x="' + (x - 19) + '" y="299" width="38" height="48" rx="5" fill="#33364a"/>'; });
-  [297, 344, 391, 439, 486, 533, 580, 628].forEach(x => { h += '<rect x="' + (x - 21) + '" y="356" width="42" height="54" rx="5" fill="#f2f2ef" stroke="#85878f" stroke-width="2"/><rect x="' + (x - 20) + '" y="441" width="40" height="33" rx="5" fill="#33364a"/>'; });
-  [706, 781, 856, 931].forEach(x => { h += '<rect x="' + (x - 35) + '" y="278" width="70" height="40" rx="5" fill="#f1f1f3" stroke="#80838b" stroke-width="2"/>'; });
-  [[671, 94], [772, 94], [873, 94]].forEach(r => { h += '<rect x="' + r[0] + '" y="370" width="' + r[1] + '" height="36" rx="5" fill="#f1f1f3" stroke="#80838b" stroke-width="2"/>'; });
-  [[672, 62], [744, 62]].forEach(r => { h += '<rect x="' + r[0] + '" y="441" width="' + r[1] + '" height="33" rx="5" fill="#33364a"/>'; });
-  h += '<rect x="838" y="441" width="84" height="29" rx="5" fill="#6f727d"/>';
+  [320, 367, 462, 509, 557].forEach(x => { h += '<rect x="' + (x - 19) + '" y="299" width="38" height="48" rx="5" fill="#1f2125"/>'; });
+  [297, 344, 391, 439, 486, 533, 580, 628].forEach(x => { h += '<rect x="' + (x - 21) + '" y="356" width="42" height="54" rx="5" fill="#fafafb" stroke="#a4aab2" stroke-width="2"/><rect x="' + (x - 20) + '" y="441" width="40" height="33" rx="5" fill="#1f2125"/>'; });
+  [706, 781, 856, 931].forEach(x => { h += '<rect x="' + (x - 35) + '" y="278" width="70" height="40" rx="5" fill="#f1f1f3" stroke="#a8aeb6" stroke-width="2"/>'; });
+  [[671, 94], [772, 94], [873, 94]].forEach(r => { h += '<rect x="' + r[0] + '" y="370" width="' + r[1] + '" height="36" rx="5" fill="#f1f1f3" stroke="#a8aeb6" stroke-width="2"/>'; });
+  [[672, 62], [744, 62]].forEach(r => { h += '<rect x="' + r[0] + '" y="441" width="' + r[1] + '" height="33" rx="5" fill="#1f2125"/>'; });
+  h += '<rect x="838" y="441" width="84" height="29" rx="5" fill="#c5cad0"/>';
   (marks || []).forEach(m => {
     if (m.box) h += '<rect x="' + m.box[0] + '" y="' + m.box[1] + '" width="' + m.box[2] + '" height="' + m.box[3] + '" rx="10" fill="rgba(211,32,15,.10)" stroke="#d3200f" stroke-width="5" stroke-dasharray="14 8"/>';
     h += '<circle cx="' + m.x + '" cy="' + m.y + '" r="19" fill="#d3200f" stroke="#fff" stroke-width="3"/><text x="' + m.x + '" y="' + (m.y + 8) + '" text-anchor="middle" font-family="Helvetica,Arial" font-weight="900" font-size="22" fill="#fff">' + m.n + '</text>';
@@ -84,10 +83,10 @@ const HELP_PAGES = [
     '<p class="cap l">' + T('<b>FUNCTION</b> (держать) + тап по номеру шага — длина паттерна · + <b>SELECTOR</b> — длина 2…16 · + <b>BACK</b> — отмена · + <b>BAR RESET</b> — копировать · + <b>TAP</b> — вставить · + удержание <b>PATTERN CLEAR</b> — случайный паттерн.', 'Hold <b>FUNCTION</b> + tap a step number = pattern length · + <b>SELECTOR</b> = length 2…16 · + <b>BACK</b> = undo · + <b>BAR RESET</b> = copy · + <b>TAP</b> = paste · + hold <b>PATTERN CLEAR</b> = random pattern.') + '</p>'],
   [() => T('ТРЕКИ', 'TRACKS'), () =>
     '<div class="two"><div class="fig sm"><svg viewBox="0 0 300 120" class="modesvg"><g font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#25262a">' +
-    '<rect x="8" y="22" width="52" height="34" rx="5" fill="#33364a"/><text x="34" y="44" text-anchor="middle" fill="#fff">I‑1A</text>' +
-    '<rect x="68" y="22" width="52" height="34" rx="5" fill="#33364a"/><text x="94" y="44" text-anchor="middle" fill="#fff">I‑3A</text>' +
-    '<rect x="128" y="22" width="52" height="34" rx="5" fill="#33364a"/><text x="154" y="44" text-anchor="middle" fill="#fff">I‑1A</text>' +
-    '<rect x="188" y="22" width="52" height="34" rx="5" fill="#33364a"/><text x="214" y="44" text-anchor="middle" fill="#fff">II‑2B</text>' +
+    '<rect x="8" y="22" width="52" height="34" rx="5" fill="#1f2125"/><text x="34" y="44" text-anchor="middle" fill="#fff">I‑1A</text>' +
+    '<rect x="68" y="22" width="52" height="34" rx="5" fill="#1f2125"/><text x="94" y="44" text-anchor="middle" fill="#fff">I‑3A</text>' +
+    '<rect x="128" y="22" width="52" height="34" rx="5" fill="#1f2125"/><text x="154" y="44" text-anchor="middle" fill="#fff">I‑1A</text>' +
+    '<rect x="188" y="22" width="52" height="34" rx="5" fill="#1f2125"/><text x="214" y="44" text-anchor="middle" fill="#fff">II‑2B</text>' +
     '<text x="8" y="14" font-size="11">' + T('ТРЕК 1 — цепочка паттернов', 'TRACK 1 — a chain of patterns') + '</text><text x="248" y="46" fill="#d3200f" font-size="18">…</text></g></svg>' +
     '<p class="cap">' + T('Трек — цепочка паттернов, играется по кругу.', 'A track is a chain of patterns that loops.') + '</p></div>' +
     '<ol class="steps tight">' +
@@ -98,10 +97,10 @@ const HELP_PAGES = [
     '<p class="cap l">' + T('Всё сохраняется само: паттерны, треки, ручки, эффекты.', 'Everything is saved automatically: patterns, tracks, knobs, effects.') + '</p>'],
   [() => 'LIB', () =>
     '<div class="two"><div class="fig sm"><svg viewBox="0 0 300 130" class="modesvg"><rect x="10" y="10" width="280" height="110" rx="10" fill="#dcdee3" stroke="#62656d" stroke-width="3"/>' +
-    '<rect x="22" y="22" width="120" height="30" rx="5" fill="#eeeff1" stroke="#80838b"/><text x="32" y="42" font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#25262a">ACID CLASSIC</text>' +
+    '<rect x="22" y="22" width="120" height="30" rx="5" fill="#eeeff1" stroke="#a8aeb6"/><text x="32" y="42" font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#25262a">ACID CLASSIC</text>' +
     '<rect x="152" y="22" width="126" height="30" rx="5" fill="#3a3d4d"/><text x="162" y="42" font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#f3f3ef">SQUELCH</text>' +
-    '<rect x="22" y="60" width="120" height="30" rx="5" fill="#eeeff1" stroke="#80838b"/><text x="32" y="80" font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#25262a">DEEP HOUSE</text>' +
-    '<rect x="152" y="60" width="126" height="30" rx="5" fill="#eeeff1" stroke="#80838b"/><text x="162" y="80" font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#25262a">RAVE STAB</text></svg>' +
+    '<rect x="22" y="60" width="120" height="30" rx="5" fill="#eeeff1" stroke="#a8aeb6"/><text x="32" y="80" font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#25262a">DEEP HOUSE</text>' +
+    '<rect x="152" y="60" width="126" height="30" rx="5" fill="#eeeff1" stroke="#a8aeb6"/><text x="162" y="80" font-family="Helvetica,Arial" font-weight="800" font-size="12" fill="#25262a">RAVE STAB</text></svg>' +
     '<p class="cap">' + T('Тёмная плашка — выбранный пресет.', 'The dark tile is the selected preset.') + '</p></div>' +
     '<ol class="steps tight">' +
     '<li>' + T('Тап по строке — загрузить пресет: <b>паттерн + темп + звук</b>. Играет секвенсор — смена на стыке такта.', 'Tap a tile to load a preset: <b>pattern + tempo + sound</b>. If the sequencer is running, the change lands on the next bar.') + '</li>' +
@@ -113,7 +112,7 @@ const HELP_PAGES = [
     '<ol class="steps"><li>' + T('<b>WAV · ЛУП</b> — рендер текущего паттерна (или трека) со звуком, эффектами и хвостом реверба.', '<b>WAV · LOOP</b> renders the current pattern (or track) with sound, effects and the reverb tail.') + '</li>' +
     '<li>' + T('<b>MIDI · ПАТТЕРН</b> — нотный файл: акценты — громче, слайды — легато. Подходит для Digitakt и DAW.', '<b>MIDI · PATTERN</b> exports notes: accents are louder, slides are legato. Works with hardware sequencers and DAWs.') + '</li></ol>' +
     '<div class="exp"><span class="xbtn" data-x="wav">' + T('WAV · ЛУП', 'WAV · LOOP') + '</span><span class="xbtn" data-x="mid">' + T('MIDI · ПАТТЕРН', 'MIDI · PATTERN') + '</span></div>' +
-    '<p class="cap l">' + T('Файл имеет имя вида <b>zion303‑I‑1A‑130bpm.wav</b>. В портретной ориентации корпус повёрнут — клади телефон набок.', 'Files are named like <b>zion303‑I‑1A‑130bpm.wav</b>. In portrait the panel is rotated — hold the phone sideways.') + '</p>']
+    '<p class="cap l">' + T('Файл имеет имя вида <b>ziiion‑I‑1A‑130bpm.wav</b>. В портретной ориентации корпус повёрнут — клади телефон набок.', 'Files are named like <b>ziiion‑I‑1A‑130bpm.wav</b>. In portrait the panel is rotated — hold the phone sideways.') + '</p>']
 ];
 helpEl.innerHTML = '<div class="x"></div><div class="lang"><span data-l="ru">RU</span><span data-l="en">EN</span></div><div class="tabs"></div><div class="pg"></div>';
 const helpTabs = helpEl.querySelector('.tabs'), helpPg = helpEl.querySelector('.pg');

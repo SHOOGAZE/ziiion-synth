@@ -36,4 +36,5 @@ function refresh() {
   setLed(L.A, S.side === 0 && S.mode !== 1); setLed(L.B, S.side === 1 && S.mode !== 1);
   setLed(L.fn, S.fn);
   setLed(L.pitch, S.mode === 3 && S.edit === 'pitch'); setLed(L.time, S.mode === 3 && S.edit === 'time');
+  if (dmHook) dmHook();
 }
