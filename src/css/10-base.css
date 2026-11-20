@@ -7,7 +7,7 @@ html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-beh
 #desk{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,#1d1f24 0%,#0b0c0e 60%,#040405 100%)}
 #stage{position:absolute;left:0;top:0;width:1000px;height:500px;transform-origin:0 0;will-change:transform}
 
-/* body: frosted polycarbonate over a PCB, chrome rim */
+/* body: frosted plastic over a PCB, chrome rim */
 #chassis{position:absolute;inset:0;border-radius:18px;overflow:hidden;background:#d5d9de;
   box-shadow:0 0 0 3px #17181c,inset 0 0 0 1px rgba(255,255,255,.9)}
 #chassis::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;z-index:50;

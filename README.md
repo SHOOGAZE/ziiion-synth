@@ -1,12 +1,12 @@
 # ZIIION
 
-A pocket bass-line synthesizer and step sequencer for the phone browser — styled as a transparent-polycarbonate case over a visible PCB, with a dot-matrix display and a single red accent, after the classic Roland TB-303 / TB-03 layout. One HTML file, no dependencies, works offline as a PWA.
+A pocket acid bass-line synthesizer and step sequencer for the phone browser, with a frosted-case look over a visible circuit board, a dot-matrix display and a single red accent. One HTML file, no dependencies, works offline as a PWA.
 
 **▶ Live demo: https://shoogaze.github.io/ziiion-synth/**
 
 Open it on your phone or computer, tap once to start the audio. Add to Home Screen to use it as an app.
 
-> ZIIION is an independent project inspired by the TB-303 design. It is not affiliated with or endorsed by Roland. "Roland" and "TB-303" are trademarks of their respective owners.
+> ZIIION is an independent, original project. All names mentioned belong to their respective owners.
 
 ![ZIIION panel](screenshots/panel.png)
 
@@ -17,7 +17,7 @@ Open it on your phone or computer, tap once to start the audio. Add to Home Scre
 ## Features
 
 - **Voice** — PolyBLEP saw / square, 4× oversampled 24 dB ladder filter with resonance, envelope modulation, accent sweep and slide, running in an AudioWorklet.
-- **Sequencer** — the 303 way: 64 patterns (4 groups × A/B × 8), 16 steps with note / tie / rest, octave down/up, accent and slide; 8 tracks of pattern chains; copy / paste / undo.
+- **Sequencer** — classic acid-style: 64 patterns (4 groups × A/B × 8), 16 steps with note / tie / rest, octave down/up, accent and slide; 8 tracks of pattern chains; copy / paste / undo.
 - **Effects** — distortion, ping-pong delay (3/16), stereo reverb.
 - **Library** — 32 musical presets (pattern + tempo + sound) across Acid, Techno, House, Electro, Rave, Dub and Ambient, a random generator, your own saved presets with JSON import / export.
 - **Export** — WAV loop (with effect tails) and MIDI file (accents as velocity, slides as legato).
@@ -106,4 +106,4 @@ MIT © Kirill Kinderhart.
 
 ## По-русски
 
-Карманный бас-синтезатор и секвенсор в духе Roland TB‑303: один HTML-файл, работает офлайн, ставится на экран «Домой». Внутри 32 готовых пресета (паттерн + темп + звук), рандом, экспорт WAV и MIDI, встроенная справка на русском и английском (кнопка `?`). Сборка: `python3 build.py`.
+Карманный бас-синтезатор и секвенсор в духе классического кислотного баса: один HTML-файл, работает офлайн, ставится на экран «Домой». Внутри 32 готовых пресета (паттерн + темп + звук), рандом, экспорт WAV и MIDI, встроенная справка на русском и английском (кнопка `?`). Сборка: `python3 build.py`.

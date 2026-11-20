@@ -87,5 +87,5 @@ powerEl.addEventListener('click', async e => {
   powering = true;
   const ok = await powerOn();
   powering = false;
-  if (ok) powerEl.classList.add('gone');
+  if (ok) { powerEl.classList.add('gone'); if (splashHook) splashHook(); }
 });

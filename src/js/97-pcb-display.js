@@ -5,7 +5,7 @@
   const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
   const ri = (a, b) => a + Math.floor(rnd() * (b - a + 1));
 
-  /* ---------- chrome rim around the polycarbonate body ---------- */
+  /* ---------- chrome rim around the frosted body ---------- */
   const rim = el('rim', stage, '');
   stage.insertBefore(rim, chassis);
 
@@ -52,7 +52,7 @@
     svg += '<circle cx="' + (x + 5) + '" cy="' + (y + 5) + '" r="1.6" fill="' + TR + '"/><text x="' + (x + w / 2) + '" y="' + (y + h / 2 + 2.2) + '" text-anchor="middle" font-size="6.5" font-family="ui-monospace,Menlo,Consolas,monospace" fill="#69707a">' + name + '</text>';
   }
   const res = (x, y, v) => { svg += '<rect x="' + x + '" y="' + y + '" width="' + (v ? 5 : 11) + '" height="' + (v ? 11 : 5) + '" rx="1" fill="#bfc4ca" stroke="' + TR + '" stroke-width="1"/>'; };
-  chip(28, 128, 52, 52, 'ZN-303', 6.5);
+  chip(28, 128, 52, 52, 'ZN-01', 6.5);
   chip(940, 130, 40, 40, 'DSP-1', 6.5);
   chip(938, 196, 30, 14, 'MX-4', 5);
   res(26, 196, 0); res(40, 196, 0); res(54, 196, 0); res(70, 192, 1); res(84, 150, 1); res(84, 164, 1);
@@ -88,7 +88,7 @@
   haze();
 
   /* ---------- red accent ---------- */
-  el('redsq', chassis, 'left:562px;top:104px');
+  const redsq = el('redsq', chassis, 'left:562px;top:104px');
 
   /* ---------- dot-matrix display ---------- */
   const COLS = 84, ROWS = 32, PITCH = 3, PAD_ = 6;
@@ -153,7 +153,9 @@
   }
   const width = (s, sc) => String(s).length * 6 * (sc || 1) - (sc || 1);
 
+  let splashing = false;
   function draw() {
+    if (splashing) return;
     ctx.clearRect(0, 0, cv.width, cv.height);
     ctx.drawImage(bg, 0, 0);
     const bpm = String(bpmOf(S.k.tempo));
@@ -203,4 +205,40 @@
     return text_ != null;
   };
   draw();
+
+  /* ---------- boot splash: dots fly in from all over the display and form the logo ---------- */
+  function splash() {
+    const g = [];
+    let cx0 = 7;
+    for (const ch of 'ZIIION') {
+      const gl = G[ch];
+      for (let r = 0; r < 7; r++) for (let c = 0; c < 5; c++) if (gl[r][c]) for (let u = 0; u < 2; u++) for (let v = 0; v < 2; v++) g.push([cx0 + c * 2 + u, 9 + r * 2 + v, rnd() * COLS, rnd() * ROWS, rnd() * .7]);
+      cx0 += 12;
+    }
+    try { // short quiet bass blip
+      const ac = engine.ctx, o = ac.createOscillator(), f = ac.createBiquadFilter(), gn = ac.createGain(), t = ac.currentTime;
+      o.type = 'sawtooth'; o.frequency.value = 41.2; f.type = 'lowpass'; f.Q.value = 6;
+      f.frequency.setValueAtTime(180, t); f.frequency.exponentialRampToValueAtTime(1600, t + .7); f.frequency.exponentialRampToValueAtTime(300, t + 1.5);
+      gn.gain.setValueAtTime(0, t); gn.gain.linearRampToValueAtTime(.16, t + .6); gn.gain.exponentialRampToValueAtTime(.001, t + 1.7);
+      o.connect(f); f.connect(gn); gn.connect(ac.destination); o.start(t); o.stop(t + 1.8);
+    } catch (e) { /* ignore */ }
+    splashing = true;
+    const t0 = performance.now();
+    const skip = () => { splashing = false; window.removeEventListener('pointerdown', skip, true); draw(); };
+    window.addEventListener('pointerdown', skip, true);
+    (function step(now) {
+      if (!splashing) return;
+      const t = (now - t0) / 1000;
+      if (t > 2.5) { skip(); return; }
+      ctx.clearRect(0, 0, cv.width, cv.height); ctx.drawImage(bg, 0, 0);
+      const fade = t > 1.9 ? Math.max(0, (2.5 - t) / .6) : 1;
+      for (const d of g) {
+        const k = Math.min(1, Math.max(0, (t - d[4] * .8) / .9)), e = 1 - Math.pow(1 - k, 3);
+        dot(Math.round(d[2] + (d[0] - d[2]) * e), Math.round(d[3] + (d[1] - d[3]) * e), (.3 + .7 * e) * fade);
+      }
+      if (t > 1.5 && !redsq.classList.contains('flash')) { redsq.classList.add('flash'); setTimeout(() => redsq.classList.remove('flash'), 900); }
+      requestAnimationFrame(step);
+    })(t0);
+  }
+  splashHook = splash;
 })();

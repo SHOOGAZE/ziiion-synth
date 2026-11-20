@@ -19,7 +19,7 @@ html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-beh
 #desk{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,#1d1f24 0%,#0b0c0e 60%,#040405 100%)}
 #stage{position:absolute;left:0;top:0;width:1000px;height:500px;transform-origin:0 0;will-change:transform}
 
-/* body: frosted polycarbonate over a PCB, chrome rim */
+/* body: frosted plastic over a PCB, chrome rim */
 #chassis{position:absolute;inset:0;border-radius:18px;overflow:hidden;background:#d5d9de;
   box-shadow:0 0 0 3px #17181c,inset 0 0 0 1px rgba(255,255,255,.9)}
 #chassis::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;z-index:50;
@@ -158,6 +158,8 @@ svg polyline{stroke:var(--ink)}
 #help .exp{display:flex;gap:10px;margin-top:10px}
 #help .xbtn{padding:10px 14px;border-radius:4px;background:linear-gradient(180deg,#f6f7f8 0%,#eceef0 50%,#e2e5e8 100%);color:#1d1f24;font:800 11px/1 var(--mono);letter-spacing:.14em;box-shadow:0 3px 0 #a8aeb6,0 5px 6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.8);cursor:pointer}
 #help .x{position:absolute;right:26px;top:18px;font:800 11px/1 var(--mono);color:#4a4f58;letter-spacing:.14em}
+.redsq.flash{animation:redflash .3s steps(2,end) 3}
+@keyframes redflash{50%{opacity:.15}}
 /* lite mode: cheaper rendering for older phones */
 html.lite .haze,html.lite .haze.round{box-shadow:none}
 html.lite #chassis,html.lite .rim{box-shadow:0 8px 14px rgba(0,0,0,.5)}
@@ -789,6 +791,7 @@ window.addEventListener('click', resumeAudio, true);
 const osdEl = el('', stage, '', '', 'div'); osdEl.id = 'osd';
 let osdTimer = 0;
 let dmHook = null; // set by the dot-matrix display
+let splashHook = null; // boot animation, set by the display
 function osd(text, ms) {
   osdEl.textContent = text;
   if (dmHook && dmHook(text, ms || 1200)) return;
@@ -999,7 +1002,7 @@ const LIB = [
   ['AMBIENT', 'AMBIENT', 90, 'D1^ _ _ _ A1 _ _ _ F1^ _ _ . C2~ D2 _ _', [.5, .4, .5, .45, .85, .4], 1, 0, 1, 1],
   ['AMBIENT', 'DRIFT', 76, 'G1^ _ _ _ _ _ _ _ D2^ _ _ _ A1~ G1 _ _', [.5, .46, .4, .35, .9, .3], 0, 0, 1, 1],
   ['ACID', 'ACID RAIN', 126, 'G1^ . G1 . D2 . G1~ A#1 G1 . G1^ . F2~ D2 . G1', [.5, .3, .78, .72, .28, .7], 0, 0, 1, 0],
-  ['ACID', '303 SAW', 134, 'C2^ C2 . C3 C2 . D#2~ C2 . C2^ . C3 . A#1~ C2 .', [.5, .27, .75, .8, .26, .8], 0, 1, 0, 0],
+  ['ACID', 'ACID SAW', 134, 'C2^ C2 . C3 C2 . D#2~ C2 . C2^ . C3 . A#1~ C2 .', [.5, .27, .75, .8, .26, .8], 0, 1, 0, 0],
   ['ACID', 'WARP', 142, 'D2^ . D3 D2 . D2 A2~ . D2^ . D3 . D2 F2~ .', [.5, .35, .85, .75, .2, .85], 0, 1, 1, 0],
   ['ACID', 'SLOW BURN', 112, 'A1^ . . A1 . A1~ C2 . A1 . . A1^ . D2~ C2 .', [.5, .2, .8, .6, .5, .6], 0, 0, 1, 1],
   ['TECHNO', 'ROLLING', 135, 'F1 F1 . F1 F1^ . F1 F1 . F1 F1 . F2 . F1 .', [.5, .27, .45, .4, .2, .6], 0, 0, 0, 0],
@@ -1571,7 +1574,7 @@ powerEl.addEventListener('click', async e => {
   powering = true;
   const ok = await powerOn();
   powering = false;
-  if (ok) powerEl.classList.add('gone');
+  if (ok) { powerEl.classList.add('gone'); if (splashHook) splashHook(); }
 });
 /* ================= logic ================= */
 const undoStack = [];
@@ -1843,7 +1846,7 @@ window.addEventListener('keyup', e => {
   const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
   const ri = (a, b) => a + Math.floor(rnd() * (b - a + 1));
 
-  /* ---------- chrome rim around the polycarbonate body ---------- */
+  /* ---------- chrome rim around the frosted body ---------- */
   const rim = el('rim', stage, '');
   stage.insertBefore(rim, chassis);
 
@@ -1890,7 +1893,7 @@ window.addEventListener('keyup', e => {
     svg += '<circle cx="' + (x + 5) + '" cy="' + (y + 5) + '" r="1.6" fill="' + TR + '"/><text x="' + (x + w / 2) + '" y="' + (y + h / 2 + 2.2) + '" text-anchor="middle" font-size="6.5" font-family="ui-monospace,Menlo,Consolas,monospace" fill="#69707a">' + name + '</text>';
   }
   const res = (x, y, v) => { svg += '<rect x="' + x + '" y="' + y + '" width="' + (v ? 5 : 11) + '" height="' + (v ? 11 : 5) + '" rx="1" fill="#bfc4ca" stroke="' + TR + '" stroke-width="1"/>'; };
-  chip(28, 128, 52, 52, 'ZN-303', 6.5);
+  chip(28, 128, 52, 52, 'ZN-01', 6.5);
   chip(940, 130, 40, 40, 'DSP-1', 6.5);
   chip(938, 196, 30, 14, 'MX-4', 5);
   res(26, 196, 0); res(40, 196, 0); res(54, 196, 0); res(70, 192, 1); res(84, 150, 1); res(84, 164, 1);
@@ -1926,7 +1929,7 @@ window.addEventListener('keyup', e => {
   haze();
 
   /* ---------- red accent ---------- */
-  el('redsq', chassis, 'left:562px;top:104px');
+  const redsq = el('redsq', chassis, 'left:562px;top:104px');
 
   /* ---------- dot-matrix display ---------- */
   const COLS = 84, ROWS = 32, PITCH = 3, PAD_ = 6;
@@ -1991,7 +1994,9 @@ window.addEventListener('keyup', e => {
   }
   const width = (s, sc) => String(s).length * 6 * (sc || 1) - (sc || 1);
 
+  let splashing = false;
   function draw() {
+    if (splashing) return;
     ctx.clearRect(0, 0, cv.width, cv.height);
     ctx.drawImage(bg, 0, 0);
     const bpm = String(bpmOf(S.k.tempo));
@@ -2041,6 +2046,42 @@ window.addEventListener('keyup', e => {
     return text_ != null;
   };
   draw();
+
+  /* ---------- boot splash: dots fly in from all over the display and form the logo ---------- */
+  function splash() {
+    const g = [];
+    let cx0 = 7;
+    for (const ch of 'ZIIION') {
+      const gl = G[ch];
+      for (let r = 0; r < 7; r++) for (let c = 0; c < 5; c++) if (gl[r][c]) for (let u = 0; u < 2; u++) for (let v = 0; v < 2; v++) g.push([cx0 + c * 2 + u, 9 + r * 2 + v, rnd() * COLS, rnd() * ROWS, rnd() * .7]);
+      cx0 += 12;
+    }
+    try { // short quiet bass blip
+      const ac = engine.ctx, o = ac.createOscillator(), f = ac.createBiquadFilter(), gn = ac.createGain(), t = ac.currentTime;
+      o.type = 'sawtooth'; o.frequency.value = 41.2; f.type = 'lowpass'; f.Q.value = 6;
+      f.frequency.setValueAtTime(180, t); f.frequency.exponentialRampToValueAtTime(1600, t + .7); f.frequency.exponentialRampToValueAtTime(300, t + 1.5);
+      gn.gain.setValueAtTime(0, t); gn.gain.linearRampToValueAtTime(.16, t + .6); gn.gain.exponentialRampToValueAtTime(.001, t + 1.7);
+      o.connect(f); f.connect(gn); gn.connect(ac.destination); o.start(t); o.stop(t + 1.8);
+    } catch (e) { /* ignore */ }
+    splashing = true;
+    const t0 = performance.now();
+    const skip = () => { splashing = false; window.removeEventListener('pointerdown', skip, true); draw(); };
+    window.addEventListener('pointerdown', skip, true);
+    (function step(now) {
+      if (!splashing) return;
+      const t = (now - t0) / 1000;
+      if (t > 2.5) { skip(); return; }
+      ctx.clearRect(0, 0, cv.width, cv.height); ctx.drawImage(bg, 0, 0);
+      const fade = t > 1.9 ? Math.max(0, (2.5 - t) / .6) : 1;
+      for (const d of g) {
+        const k = Math.min(1, Math.max(0, (t - d[4] * .8) / .9)), e = 1 - Math.pow(1 - k, 3);
+        dot(Math.round(d[2] + (d[0] - d[2]) * e), Math.round(d[3] + (d[1] - d[3]) * e), (.3 + .7 * e) * fade);
+      }
+      if (t > 1.5 && !redsq.classList.contains('flash')) { redsq.classList.add('flash'); setTimeout(() => redsq.classList.remove('flash'), 900); }
+      requestAnimationFrame(step);
+    })(t0);
+  }
+  splashHook = splash;
 })();
 /* ---- boot ---- */
 fit();

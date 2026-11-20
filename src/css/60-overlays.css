@@ -28,3 +28,5 @@
 #help .exp{display:flex;gap:10px;margin-top:10px}
 #help .xbtn{padding:10px 14px;border-radius:4px;background:linear-gradient(180deg,#f6f7f8 0%,#eceef0 50%,#e2e5e8 100%);color:#1d1f24;font:800 11px/1 var(--mono);letter-spacing:.14em;box-shadow:0 3px 0 #a8aeb6,0 5px 6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.8);cursor:pointer}
 #help .x{position:absolute;right:26px;top:18px;font:800 11px/1 var(--mono);color:#4a4f58;letter-spacing:.14em}
+.redsq.flash{animation:redflash .3s steps(2,end) 3}
+@keyframes redflash{50%{opacity:.15}}
