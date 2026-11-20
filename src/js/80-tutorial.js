@@ -1,13 +1,15 @@
 /* ---- tutorial (tabs, schematic of the panel, mode knob, example pattern) ---- */
 const SVGNS = 'http://www.w3.org/2000/svg';
 function schem(marks) {
-  let h = '<svg viewBox="0 0 1000 500" class="schem"><rect x="4" y="4" width="992" height="492" rx="26" fill="#dcdee3" stroke="#62656d" stroke-width="4"/>' +
-    '<line x1="8" x2="992" y1="96" y2="96" stroke="#3b3c42" stroke-width="3"/><line x1="8" x2="992" y1="226" y2="226" stroke="#3b3c42" stroke-width="3"/>';
+  let h = '<svg viewBox="0 0 1000 500" class="schem"><defs><radialGradient id="sgw" cx="0" cy=".35" r=".5"><stop offset="0" stop-color="#ff9669" stop-opacity=".45"/><stop offset="1" stop-color="#ff9669" stop-opacity="0"/></radialGradient><radialGradient id="sgc" cx="1" cy=".75" r=".5"><stop offset="0" stop-color="#50c8e1" stop-opacity=".5"/><stop offset="1" stop-color="#50c8e1" stop-opacity="0"/></radialGradient><radialGradient id="sgk" cx=".38" cy=".28" r=".85"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#c8d0d8" stop-opacity=".6"/></radialGradient></defs>' +
+    '<rect x="4" y="4" width="992" height="492" rx="26" fill="#eceff2" stroke="#8f959e" stroke-width="3"/><rect x="4" y="4" width="992" height="492" rx="26" fill="url(#sgw)"/><rect x="4" y="4" width="992" height="492" rx="26" fill="url(#sgc)"/>' +
+    '<line x1="8" x2="992" y1="96" y2="96" stroke="#8d939c" stroke-width="2"/><line x1="8" x2="992" y1="226" y2="226" stroke="#8d939c" stroke-width="2"/>';
+  const gk = (x, y, r) => '<circle cx="' + x + '" cy="' + (y + 3) + '" r="' + r + '" fill="#3c4654" opacity=".18"/><circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="url(#sgk)" stroke="#8f959e" stroke-width="2"/><circle cx="' + x + '" cy="' + y + '" r="' + (r * .6) + '" fill="#fff" fill-opacity=".45" stroke="#b4bcc6" stroke-width="1.5"/><rect x="' + (x - 1.8) + '" y="' + (y - r * .96) + '" width="3.6" height="' + (r * .5) + '" fill="#e8321e"/>';
   const circ = (x, y, r, f) => '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + (f || '#17181b') + '"/>';
-  [301, 381, 460, 540, 619, 698].forEach(x => { h += circ(x, 58, 24, '#8f929b') + circ(x, 58, 18, '#e6e7ea'); });
+  [301, 381, 460, 540, 619, 698].forEach(x => { h += gk(x, 58, 24); });
   [130, 772, 822, 872].forEach(x => { h += '<rect x="' + (x - 24) + '" y="38" width="48" height="18" rx="4" fill="#17181b"/>'; });
   [50, 210, 920, 966].forEach(x => { h += circ(x, 46, 12, '#8d909a'); });
-  [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += circ(k[0], k[1], k[2], '#8f929b') + circ(k[0], k[1], k[2] * 0.76, '#e6e7ea'); });
+  [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += gk(k[0], k[1], k[2]); });
   h += '<rect x="562" y="114" width="264" height="108" rx="10" fill="#070708"/><text x="574" y="140" font-family="Courier New,monospace" font-weight="700" font-size="22" fill="#f4f5f7">ZIIION</text><text x="812" y="150" text-anchor="end" font-family="Courier New,monospace" font-weight="700" font-size="52" fill="#f4f5f7">128</text><rect x="562" y="104" width="8" height="8" fill="#e8321e"/>';
   [[24, 261, 100, 31, '#c5cad0'], [134, 261, 100, 31, '#c5cad0'], [24, 323, 210, 46, '#f6f7f8'], [24, 415, 100, 31, '#f6f7f8'], [134, 415, 100, 31, '#f6f7f8']]
     .forEach(r => { h += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + r[2] + '" height="' + r[3] + '" rx="5" fill="' + r[4] + '" stroke="#a8aeb6" stroke-width="2"/>'; });
@@ -52,12 +54,12 @@ function stepStrip(str) {
 }
 const HELP_PAGES = [
   [() => T('СТАРТ', 'START'), () =>
-    '<div class="fig">' + schem([{ x: 129, y: 346, n: 1, box: [20, 318, 218, 56] }, { x: 462, y: 328, n: 2, box: [270, 293, 385, 125] }, { x: 540, y: 58, n: 3, box: [280, 30, 440, 56] }, { x: 607, y: 134, n: 4, box: [560, 144, 94, 50] }, { x: 880, y: 455, n: 5, box: [832, 436, 96, 42] }]) + '</div>' +
+    '<div class="fig">' + schem([{ x: 129, y: 346, n: 1, box: [20, 318, 218, 56] }, { x: 462, y: 328, n: 2, box: [270, 293, 385, 125] }, { x: 540, y: 58, n: 3, box: [280, 30, 440, 56] }, { x: 607, y: 212, n: 4, box: [560, 144, 94, 50] }, { x: 880, y: 455, n: 5, box: [832, 436, 96, 42] }]) + '</div>' +
     '<ol class="steps">' +
     '<li>' + T('<b>RUN/STOP</b> — запуск. Паттерн <i>I‑1A</i> уже записан.', '<b>RUN/STOP</b> starts playback. Pattern <i>I‑1A</i> is already loaded.') + '</li>' +
     '<li>' + T('<b>Клавиши C…C</b> играют вживую. На Mac: <b>A W S E D F T G Y H U J K</b>, пробел — RUN.', '<b>Keys C…C</b> play live. On a computer: <b>A W S E D F T G Y H U J K</b>, Space = RUN.') + '</li>' +
     '<li>' + T('<b>CUT OFF</b>, <b>RESONANCE</b>, <b>ENV MOD</b> — основа кислотного звука. Ручки: свайп вверх/вниз, двойной тап — сброс.', '<b>CUT OFF</b>, <b>RESONANCE</b> and <b>ENV MOD</b> make the acid sound. Knobs: swipe up/down, double‑tap to reset.') + '</li>' +
-    '<li>' + T('<b>TEMPO</b> или несколько тапов по <b>TAP</b>. Темп виден на красном дисплее.', 'Turn <b>TEMPO</b> or tap <b>TAP</b> a few times. The tempo shows on the red display.') + '</li>' +
+    '<li>' + T('<b>TEMPO</b> или несколько тапов по <b>TAP</b>. Темп виден на дисплее.', 'Turn <b>TEMPO</b> or tap <b>TAP</b> a few times. The tempo shows on the display.') + '</li>' +
     '<li>' + T('<b>LIB</b> — готовые пресеты и рандом.', '<b>LIB</b> opens ready‑made presets and a random button.') + '</li></ol>'],
   [() => T('ПАНЕЛЬ', 'PANEL'), () =>
     '<div class="fig">' + schem([{ x: 130, y: 20, n: 1 }, { x: 460, y: 20, n: 2 }, { x: 822, y: 20, n: 3 }, { x: 290, y: 118, n: 4, box: [254, 130, 72, 76] }, { x: 455, y: 118, n: 5, box: [419, 130, 72, 76] }, { x: 886, y: 118, n: 6 }, { x: 129, y: 246, n: 7, box: [20, 256, 218, 40] }, { x: 462, y: 428, n: 8, box: [270, 436, 385, 42] }, { x: 810, y: 342, n: 9 }]) + '</div>' +

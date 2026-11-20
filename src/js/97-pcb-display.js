@@ -70,6 +70,11 @@
   tx(12, 220, 'TP1  TP2  TP3', -90); tx(988, 224, 'J4  CN-FFC 16P', -90);
   tx(556, 224, 'R101  R102  C21  C22  L3', 0); tx(556, 112, 'U7 / U8   PWR-IN   GND', 0);
   tx(330, 224, '+ - + -', 0); tx(250, 296, 'FFC-A', 0);
+  (function dip(x, y, w, h, n) {
+    for (let i = 0; i < n; i++) { const yy = y + 8 + i * ((h - 16) / (n - 1)); svg += '<rect x="' + (x - 6) + '" y="' + (yy - 1.5) + '" width="7" height="3" fill="#9aa0a8"/><rect x="' + (x + w - 1) + '" y="' + (yy - 1.5) + '" width="7" height="3" fill="#9aa0a8"/>'; }
+    svg += '<rect x="' + (x + 2) + '" y="' + (y + 3) + '" width="' + w + '" height="' + h + '" rx="3" fill="#000" opacity=".18"/><rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="3" fill="#2a2d33" stroke="#14161a"/>';
+    svg += '<circle cx="' + (x + w / 2) + '" cy="' + (y + 2) + '" r="3" fill="#14161a"/><text transform="translate(' + (x + w / 2 + 3) + ' ' + (y + h / 2) + ') rotate(90)" text-anchor="middle" font-size="6.5" font-family="ui-monospace,Menlo,monospace" fill="#aab0b8">ZN-2800  SEQ/DSP</text>';
+  })(200, 118, 26, 96, 14);
   const pcb = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   pcb.setAttribute('viewBox', '0 0 1000 500'); pcb.setAttribute('class', 'pcb'); pcb.innerHTML = svg;
   chassis.insertBefore(pcb, chassis.firstChild);

@@ -1,6 +1,6 @@
 :root{--ink:#1d1f24;--ink2:#4a4f58;--line:#8d939c;--red:#e8321e;--led-off:#b9bdc4;
   --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Courier New",monospace;--sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --pcb:none;--sheet:linear-gradient(rgba(240,242,244,.82),rgba(234,237,240,.82))}
+  --pcb:none;--sheet:radial-gradient(ellipse 40% 65% at 0% 35%,rgba(255,150,105,.3),rgba(255,150,105,0) 70%),radial-gradient(ellipse 45% 70% at 100% 75%,rgba(80,200,225,.34),rgba(80,200,225,0) 70%),linear-gradient(rgba(240,242,244,.8),rgba(234,237,240,.8))}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-behavior:none;touch-action:none;
   user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-family:var(--sans)}
@@ -33,7 +33,7 @@ html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-beh
 
 /* labels: technical mono, with a halo so the board never swallows them */
 .lab{position:absolute;white-space:nowrap;font:600 8.5px/1 var(--mono);letter-spacing:.06em;color:var(--ink);text-transform:uppercase;
-  pointer-events:none;transform:translate(-50%,-50%);text-shadow:0 0 2px #e6e9ec,0 0 2px #e6e9ec,0 0 4px #e6e9ec,0 0 6px #e6e9ec}
+  pointer-events:none;transform:translate(-50%,-50%);text-shadow:0 0 2px #eef0f3,0 0 2px #eef0f3,0 0 3px #eef0f3,0 0 4px #eef0f3,0 0 6px #eef0f3,0 0 8px #eef0f3}
 .lab.sm{font-size:8px;letter-spacing:.04em}
 .lab.lg{font-size:10px}
 .brk{position:absolute;border:1px solid var(--ink2);border-bottom:none;height:5px;pointer-events:none}
@@ -43,3 +43,8 @@ html,body{margin:0;height:100%;background:#0b0c0f;overflow:hidden;overscroll-beh
   box-shadow:0 0 0 2px #c3c7cd,0 0 0 3px #7e848d,0 3px 8px rgba(30,36,46,.35),inset 0 0 12px rgba(0,0,0,.9)}
 .dmglass{position:absolute;inset:0;border-radius:10px;
   background:linear-gradient(155deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 34%),linear-gradient(0deg,rgba(255,255,255,.04),rgba(255,255,255,0) 40%)}
+/* coloured edge light */
+#chassis::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(ellipse 45% 70% at 0% 35%,rgba(255,150,105,.38),rgba(255,150,105,0) 70%),
+    radial-gradient(ellipse 50% 75% at 100% 70%,rgba(80,200,225,.4),rgba(80,200,225,0) 70%),
+    radial-gradient(ellipse 30% 40% at 70% 0%,rgba(255,170,190,.22),rgba(255,170,190,0) 70%)}
