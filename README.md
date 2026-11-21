@@ -1,6 +1,6 @@
 # ZIIION
 
-A pocket acid bass-line synthesizer and step sequencer for the phone browser, with a frosted-case look over a visible circuit board, a dot-matrix display and a single red accent. One HTML file, no dependencies, works offline as a PWA.
+A pocket acid bass-line synthesizer and step sequencer for the phone browser, with a white matte case lying over a faint circuit board, glass knobs, a dot-matrix display and a single muted red accent. One HTML file, no dependencies, works offline as a PWA.
 
 **▶ Live demo: https://shoogaze.github.io/ziiion-synth/**
 
@@ -22,7 +22,7 @@ Open it on your phone or computer, tap once to start the audio. Add to Home Scre
 - **Library** — 32 musical presets (pattern + tempo + sound) across Acid, Techno, House, Electro, Rave, Dub and Ambient, a random generator, your own saved presets with JSON import / export.
 - **Export** — WAV loop (with effect tails) and MIDI file (accents as velocity, slides as legato).
 - **Interface** — dot-matrix display (tempo, mode, pattern, current note, knob values, step strip), tap tempo, multi-touch keys, built-in tutorial in English and Russian (`?` button, RU / EN switch), portrait mode rotates the panel.
-- **Performance** — knobs have some weight (slow drags are fine-grained, fast ones coarse). **LITE mode** (LIB → LITE) drops the blurs, shadows and glows and halves the filter oversampling; it is on by default on iPhone.
+- **Performance** — knobs feel like a stiff dial: slow drags are fine-grained, fast ones coarse, they drag harder near the end stops and settle softly into a notch at each scale mark. **LITE mode** (LIB → LITE) drops the blurs, shadows and glows and halves the filter oversampling; it is on by default on iPhone.
 - **PWA** — add to Home Screen on iPhone / Android; works offline after the first visit.
 
 ## Install on iPhone
@@ -97,6 +97,12 @@ The repository is `SHOOGAZE/ziiion-synth`. Push it, then Settings → Pages → 
 | LIB | presets, random, your own presets |
 
 Full walkthrough: the `?` button inside the app.
+
+## Family
+
+ZIIION shares its look and feel with other pocket instruments by the same author:
+
+- [IRIDESCENT](https://github.com/SHOOGAZE/iridescent-player-) — an analog-digital CD player for the phone, with a DJ console for tablet and desktop.
 
 ## License
 

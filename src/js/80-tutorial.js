@@ -1,16 +1,16 @@
 /* ---- tutorial (tabs, schematic of the panel, mode knob, example pattern) ---- */
 const SVGNS = 'http://www.w3.org/2000/svg';
 function schem(marks) {
-  let h = '<svg viewBox="0 0 1000 500" class="schem"><defs><radialGradient id="sgw" cx="0" cy=".35" r=".5"><stop offset="0" stop-color="#ff9669" stop-opacity=".45"/><stop offset="1" stop-color="#ff9669" stop-opacity="0"/></radialGradient><radialGradient id="sgc" cx="1" cy=".75" r=".5"><stop offset="0" stop-color="#50c8e1" stop-opacity=".5"/><stop offset="1" stop-color="#50c8e1" stop-opacity="0"/></radialGradient><radialGradient id="sgk" cx=".38" cy=".28" r=".85"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#c8d0d8" stop-opacity=".6"/></radialGradient></defs>' +
-    '<rect x="4" y="4" width="992" height="492" rx="26" fill="#eceff2" stroke="#8f959e" stroke-width="3"/><rect x="4" y="4" width="992" height="492" rx="26" fill="url(#sgw)"/><rect x="4" y="4" width="992" height="492" rx="26" fill="url(#sgc)"/>' +
+  let h = '<svg viewBox="0 0 1000 500" class="schem"><defs><radialGradient id="sgk" cx=".38" cy=".28" r=".85"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#c8d0d8" stop-opacity=".6"/></radialGradient></defs>' +
+    '<rect x="4" y="4" width="992" height="492" rx="26" fill="#eceff2" stroke="#8f959e" stroke-width="3"/>' +
     '<line x1="8" x2="992" y1="96" y2="96" stroke="#8d939c" stroke-width="2"/><line x1="8" x2="992" y1="226" y2="226" stroke="#8d939c" stroke-width="2"/>';
-  const gk = (x, y, r) => '<circle cx="' + x + '" cy="' + (y + 3) + '" r="' + r + '" fill="#3c4654" opacity=".18"/><circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="url(#sgk)" stroke="#8f959e" stroke-width="2"/><circle cx="' + x + '" cy="' + y + '" r="' + (r * .6) + '" fill="#fff" fill-opacity=".45" stroke="#b4bcc6" stroke-width="1.5"/><rect x="' + (x - 1.8) + '" y="' + (y - r * .96) + '" width="3.6" height="' + (r * .5) + '" fill="#e8321e"/>';
+  const gk = (x, y, r) => '<circle cx="' + x + '" cy="' + (y + 3) + '" r="' + r + '" fill="#3c4654" opacity=".18"/><circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="url(#sgk)" stroke="#8f959e" stroke-width="2"/><circle cx="' + x + '" cy="' + y + '" r="' + (r * .6) + '" fill="#fff" fill-opacity=".45" stroke="#b4bcc6" stroke-width="1.5"/><rect x="' + (x - 1.8) + '" y="' + (y - r * .96) + '" width="3.6" height="' + (r * .5) + '" fill="#c8452f"/>';
   const circ = (x, y, r, f) => '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="' + (f || '#17181b') + '"/>';
   [301, 381, 460, 540, 619, 698].forEach(x => { h += gk(x, 58, 24); });
   [130, 772, 822, 872].forEach(x => { h += '<rect x="' + (x - 24) + '" y="38" width="48" height="18" rx="4" fill="#17181b"/>'; });
   [50, 210, 920, 966].forEach(x => { h += circ(x, 46, 12, '#8d909a'); });
   [[130, 168, 37], [290, 168, 32], [455, 168, 32], [886, 168, 37]].forEach(k => { h += gk(k[0], k[1], k[2]); });
-  h += '<rect x="562" y="114" width="264" height="108" rx="10" fill="#070708"/><text x="574" y="140" font-family="Courier New,monospace" font-weight="700" font-size="22" fill="#f4f5f7">ZIIION</text><text x="812" y="150" text-anchor="end" font-family="Courier New,monospace" font-weight="700" font-size="52" fill="#f4f5f7">128</text><rect x="562" y="104" width="8" height="8" fill="#e8321e"/>';
+  h += '<rect x="562" y="114" width="264" height="108" rx="10" fill="#070708"/><text x="574" y="140" font-family="Courier New,monospace" font-weight="700" font-size="22" fill="#f4f5f7">ZIIION</text><text x="812" y="150" text-anchor="end" font-family="Courier New,monospace" font-weight="700" font-size="52" fill="#f4f5f7">128</text><rect x="562" y="104" width="8" height="8" fill="#c8452f"/>';
   [[24, 261, 100, 31, '#c5cad0'], [134, 261, 100, 31, '#c5cad0'], [24, 323, 210, 46, '#f6f7f8'], [24, 415, 100, 31, '#f6f7f8'], [134, 415, 100, 31, '#f6f7f8']]
     .forEach(r => { h += '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + r[2] + '" height="' + r[3] + '" rx="5" fill="' + r[4] + '" stroke="#a8aeb6" stroke-width="2"/>'; });
   for (let i = 0; i < 16; i++) h += circ(285 + i * 23.6, 251, 5, '#6a1c14');
@@ -114,7 +114,7 @@ const HELP_PAGES = [
     '<ol class="steps"><li>' + T('<b>WAV · ЛУП</b> — рендер текущего паттерна (или трека) со звуком, эффектами и хвостом реверба.', '<b>WAV · LOOP</b> renders the current pattern (or track) with sound, effects and the reverb tail.') + '</li>' +
     '<li>' + T('<b>MIDI · ПАТТЕРН</b> — нотный файл: акценты — громче, слайды — легато. Подходит для Digitakt и DAW.', '<b>MIDI · PATTERN</b> exports notes: accents are louder, slides are legato. Works with hardware sequencers and DAWs.') + '</li></ol>' +
     '<div class="exp"><span class="xbtn" data-x="wav">' + T('WAV · ЛУП', 'WAV · LOOP') + '</span><span class="xbtn" data-x="mid">' + T('MIDI · ПАТТЕРН', 'MIDI · PATTERN') + '</span></div>' +
-    '<p class="cap l">' + T('Файл имеет имя вида <b>ziiion‑I‑1A‑130bpm.wav</b>. В портретной ориентации корпус повёрнут — клади телефон набок.', 'Files are named like <b>ziiion‑I‑1A‑130bpm.wav</b>. In portrait the panel is rotated — hold the phone sideways.') + '</p>']
+    '<p class="cap l">' + T('Файл имеет имя вида <b>ZIIION‑I‑1A‑130bpm.wav</b>. В портретной ориентации корпус повёрнут — клади телефон набок.', 'Files are named like <b>ZIIION‑I‑1A‑130bpm.wav</b>. In portrait the panel is rotated — hold the phone sideways.') + '</p>']
 ];
 helpEl.innerHTML = '<div class="x"></div><div class="lang"><span data-l="ru">RU</span><span data-l="en">EN</span></div><div class="tabs"></div><div class="pg"></div>';
 const helpTabs = helpEl.querySelector('.tabs'), helpPg = helpEl.querySelector('.pg');

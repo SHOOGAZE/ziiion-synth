@@ -98,7 +98,7 @@ const ok = (name, cond, extra) => { results.push((cond ? 'PASS ' : 'FAIL ') + na
   // E. knob drag (landscape: up = increase)
   const before = await page.evaluate(() => PB.S.k.cut);
   const box = await page.evaluate(() => { const r = document.querySelector('[data-id=k-cut]').getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
-  await page.mouse.move(box.x, box.y); await page.mouse.down(); await page.mouse.move(box.x, box.y - 40, { steps: 6 }); await page.mouse.up();
+  await page.mouse.move(box.x, box.y); await page.mouse.down(); await page.mouse.move(box.x, box.y - 80, { steps: 12 }); await page.mouse.up();
   const after = await page.evaluate(() => PB.S.k.cut); ok('knob drag up increases (landscape)', after > before + 0.15, { before, after });
 
   // F. persistence
@@ -130,7 +130,7 @@ const ok = (name, cond, extra) => { results.push((cond ? 'PASS ' : 'FAIL ') + na
   ({ ctx, page } = await open(390, 844));
   const rot = await page.evaluate(() => PB.view.rot); ok('portrait rotates stage 90deg', rot === 90, rot);
   const pb = await page.evaluate(() => { const r = document.querySelector('[data-id=k-res]').getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2, v: PB.S.k.res }; });
-  await page.mouse.move(pb.x, pb.y); await page.mouse.down(); await page.mouse.move(pb.x + 30, pb.y, { steps: 6 }); await page.mouse.up();
+  await page.mouse.move(pb.x, pb.y); await page.mouse.down(); await page.mouse.move(pb.x + 70, pb.y, { steps: 12 }); await page.mouse.up();
   const rv = await page.evaluate(() => PB.S.k.res); ok('portrait: drag toward local-up (screen right) increases', rv > pb.v + 0.1 || rv === 1, { from: pb.v, to: rv });
   // run via real click in rotated view
   const rb = await page.evaluate(() => { const r = document.querySelector('[data-id=run]').getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 }; });

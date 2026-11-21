@@ -26,7 +26,10 @@ function mkKnob(o) {
   let v = o.value;
   if (n) v = Math.round(clamp(v, 0, 1) * (n - 1)) / (n - 1);
   const api = { el: k, get value() { return v; }, get index() { return n ? Math.round(v * (n - 1)) : 0; } };
-  function render() { const t = 'rotate(' + (n ? o.angles[api.index] : -135 + v * 270) + 'deg)'; rotA.style.transform = t; rotB.style.transform = t; }
+  function render() {
+    const t = 'rotate(' + (n ? o.angles[api.index] : -135 + v * 270) + 'deg)';
+    rotA.style.transform = t; rotB.style.transform = t;
+  }
   let target = v, raf = 0;
   function setV(nv, silent) {
     nv = clamp(nv, 0, 1);
@@ -41,7 +44,7 @@ function mkKnob(o) {
     raf = 0;
     const dlt = target - v;
     if (Math.abs(dlt) < 0.0006) { setV(target); return; }
-    setV(v + dlt * 0.4);
+    setV(v + dlt * 0.26);
     raf = requestAnimationFrame(tick);
   }
   api.setIndex = (i, silent) => api.set(n > 1 ? i / (n - 1) : 0, silent);
@@ -53,7 +56,7 @@ function mkKnob(o) {
     if (drag) return;
     try { k.setPointerCapture(e.pointerId); } catch (_) { }
     target = v;
-    drag = { id: e.pointerId, x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: e.timeStamp, v0: v, i0: api.index, moved: false };
+    drag = { raw: v, notch: Math.round(v * 10), id: e.pointerId, x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: e.timeStamp, v0: v, i0: api.index, moved: false };
     k.classList.add('active');
   });
   k.addEventListener('pointermove', e => {
@@ -63,10 +66,17 @@ function mkKnob(o) {
     if (!drag.moved) return;
     const l = toLocal(dx, dy);
     if (n) { api.setIndex(clamp(drag.i0 + Math.round(-l.y / 30), 0, n - 1)); return; }
-    // resistance: slow drags are fine (1 / 300 px), fast drags are coarse (1 / 130 px)
+    // resistance: a stiff dial. Slow drags are fine (1 / 380 px), fast drags are coarser (1 / 170 px),
+    // it drags harder near both end stops, and it settles softly into a notch at each scale mark
     const st = toLocal(e.clientX - drag.lx, e.clientY - drag.ly), dt = Math.max(1, e.timeStamp - drag.lt);
     const sp = Math.abs(st.y) / dt, k = Math.min(1, Math.max(0, (sp - 0.12) / 1.0));
-    target = clamp(target - st.y * (1 / 300 + k * (1 / 130 - 1 / 300)), 0, 1);
+    let step = -st.y * (1 / 380 + k * (1 / 170 - 1 / 380));
+    if ((drag.raw < 0.05 && step < 0) || (drag.raw > 0.95 && step > 0)) step *= 0.45;
+    drag.raw = clamp(drag.raw + step, 0, 1);
+    const tt = drag.raw * 10, rr = Math.round(tt), off = tt - rr;
+    const ao = Math.abs(off), so = ao < 0.16 ? ao * 0.3 : 0.048 + (ao - 0.16) * 1.329;
+    target = clamp((rr + Math.sign(off) * so) / 10, 0, 1);
+    if (rr !== drag.notch) { drag.notch = rr; if (navigator.vibrate) try { navigator.vibrate(5); } catch (_) { } }
     drag.lx = e.clientX; drag.ly = e.clientY; drag.lt = e.timeStamp;
     if (!raf) raf = requestAnimationFrame(tick);
   });

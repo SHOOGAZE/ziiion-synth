@@ -10,7 +10,7 @@
   stage.insertBefore(rim, chassis);
 
   /* ---------- PCB under the frosted body ---------- */
-  const TR = '#59616c', PAD = '#4f5762';
+  const TR = '#59616c', PAD = '#4f5762', CH = '#222831';
   let svg = '';
   const path = pts => 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('L');
   function offsetPath(pts, d) {
@@ -29,7 +29,8 @@
       const last = c[c.length - 1], k = i % 2 === 0 ? 1 : 0.7071;
       c.push([last[0] + vx * len * k, last[1] + vy * len * k]);
     }
-    const sp = 4.6;
+    const sp = 4.6, op = (y >= 320 && x <= 320) ? 0.5 : 1;
+    if (op < 1) svg += '<g opacity="' + op + '">';
     for (let j = 0; j < n; j++) {
       const o = offsetPath(c, (j - (n - 1) / 2) * sp);
       svg += '<path d="' + path(o) + '" fill="none" stroke="' + TR + '" stroke-width="1.7" stroke-linejoin="round"/>';
@@ -37,6 +38,7 @@
       svg += '<circle cx="' + e[0].toFixed(1) + '" cy="' + e[1].toFixed(1) + '" r="2.3" fill="none" stroke="' + PAD + '" stroke-width="1.2"/>';
       if (rnd() < .5) svg += '<circle cx="' + s0[0].toFixed(1) + '" cy="' + s0[1].toFixed(1) + '" r="1.7" fill="' + PAD + '"/>';
     }
+    if (op < 1) svg += '</g>';
   }
   const H = [1, 0], V = [0, 1];
   [[0, 118, 6, 4, [H]], [0, 232, 5, 4, [H]], [1000, 150, 7, 4, [[-1, 0]]], [1000, 340, 4, 4, [[-1, 0]]],
@@ -46,10 +48,10 @@
   for (let i = 0; i < 70; i++) svg += '<circle cx="' + ri(8, 992) + '" cy="' + ri(8, 492) + '" r="' + (rnd() < .3 ? 2.2 : 1.5) + '" fill="none" stroke="' + PAD + '" stroke-width="1"/>';
 
   function chip(x, y, w, h, name, pin) {
-    svg += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2.5" fill="#c3c8ce" stroke="' + TR + '" stroke-width="1.3"/>';
-    for (let p = 5; p < w - 3; p += pin) svg += '<path d="M' + (x + p) + ' ' + (y - 3.5) + 'v3.5M' + (x + p) + ' ' + (y + h) + 'v3.5" stroke="' + TR + '" stroke-width="1.3"/>';
-    for (let p = 5; p < h - 3; p += pin) svg += '<path d="M' + (x - 3.5) + ' ' + (y + p) + 'h3.5M' + (x + w) + ' ' + (y + p) + 'h3.5" stroke="' + TR + '" stroke-width="1.3"/>';
-    svg += '<circle cx="' + (x + 5) + '" cy="' + (y + 5) + '" r="1.6" fill="' + TR + '"/><text x="' + (x + w / 2) + '" y="' + (y + h / 2 + 2.2) + '" text-anchor="middle" font-size="6.5" font-family="ui-monospace,Menlo,Consolas,monospace" fill="#69707a">' + name + '</text>';
+    svg += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2.5" fill="#9ea5af" stroke="' + CH + '" stroke-width="1.3"/>';
+    for (let p = 5; p < w - 3; p += pin) svg += '<path d="M' + (x + p) + ' ' + (y - 3.5) + 'v3.5M' + (x + p) + ' ' + (y + h) + 'v3.5" stroke="' + CH + '" stroke-width="1.3"/>';
+    for (let p = 5; p < h - 3; p += pin) svg += '<path d="M' + (x - 3.5) + ' ' + (y + p) + 'h3.5M' + (x + w) + ' ' + (y + p) + 'h3.5" stroke="' + CH + '" stroke-width="1.3"/>';
+    svg += '<circle cx="' + (x + 5) + '" cy="' + (y + 5) + '" r="1.6" fill="' + CH + '"/><text x="' + (x + w / 2) + '" y="' + (y + h / 2 + 2.2) + '" text-anchor="middle" font-size="6.5" font-family="ui-monospace,Menlo,Consolas,monospace" fill="#69707a">' + name + '</text>';
   }
   const res = (x, y, v) => { svg += '<rect x="' + x + '" y="' + y + '" width="' + (v ? 5 : 11) + '" height="' + (v ? 11 : 5) + '" rx="1" fill="#bfc4ca" stroke="' + TR + '" stroke-width="1"/>'; };
   chip(28, 128, 52, 52, 'ZN-01', 6.5);

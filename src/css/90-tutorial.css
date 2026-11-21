@@ -12,7 +12,7 @@
 #help .steps{margin:0;padding:0;list-style:none;counter-reset:s;flex:1}
 #help .steps li{counter-increment:s;position:relative;padding:0 0 9px 32px;color:#2f3036}
 #help .steps.tight li{padding-bottom:7px}
-#help .steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:21px;height:21px;border-radius:4px;background:#e8321e;color:#fff;font:900 12px/21px var(--mono);text-align:center;box-shadow:0 1px 0 #a3200f}
+#help .steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:21px;height:21px;border-radius:4px;background:#c8452f;color:#fff;font:900 12px/21px var(--mono);text-align:center;box-shadow:0 1px 0 #8a2a1a}
 #help .cap{margin:6px 0 0;font:600 11px/1.35 var(--sans);color:#4a4f58}
 #help .cap.l{margin:8px 0 0}
 #help .strip{display:grid;grid-template-columns:repeat(16,1fr);gap:4px;margin:8px 0 0;width:100%}
@@ -20,7 +20,7 @@
 #help .sc em{font:700 8px/1 var(--mono);color:#6a6c75;font-style:normal}
 #help .sc b{font:800 11px/1.4 var(--mono);color:#1d1f24}#help .sc b sub{font-size:7px;color:#6a6c75}
 #help .sc u{height:9px;font:700 10px/9px Arial;color:#3a3d4d;text-decoration:none}
-#help .sc.ac{box-shadow:0 2px 0 #a3200f,inset 0 0 0 2px #e8321e}
+#help .sc.ac{box-shadow:0 2px 0 #8a2a1a,inset 0 0 0 2px #c8452f}
 #help .sc.r{opacity:.55}#help .sc.t{background:linear-gradient(180deg,#d3d5dc,#b3b6bf)}
 #help .exp{margin:14px 0}
 

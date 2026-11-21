@@ -6,7 +6,7 @@ function download(name, bytes, type) {
 }
 function exportName(ext) {
   const nm = isTrackMode() ? 'track' + (S.trackSel + 1) : patName(patIdx());
-  return 'ziiion-' + nm + '-' + bpmOf(S.k.tempo) + 'bpm.' + ext;
+  return 'ZIIION-' + nm + '-' + bpmOf(S.k.tempo) + 'bpm.' + ext;
 }
 function wavBytes(buf) {
   const n = buf.length, ch = [buf.getChannelData(0), buf.getChannelData(1)];

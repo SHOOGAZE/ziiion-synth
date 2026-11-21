@@ -28,7 +28,7 @@
 #lib .row.cur .rt b{color:#f4f5f7}#lib .row.cur .rt span{color:#b9bbc8}
 #lib .mini{display:flex;align-items:flex-end;gap:1.5px;height:19px;flex:0 0 auto}
 #lib .mini i{display:block;width:3px;background:#4a4f58;border-radius:1px;min-height:2px}
-#lib .mini i.a{background:#e8321e}
+#lib .mini i.a{background:#c8452f}
 #lib .mini i.r{height:2px;background:#9a9da6}
 #lib .mini i.t{height:5px;background:#7c7f89}
 #lib .row.cur .mini i{background:#c9cbd6}#lib .row.cur .mini i.a{background:#ff6a52}#lib .row.cur .mini i.r{background:#6a6d80}#lib .row.cur .mini i.t{background:#9395a6}
